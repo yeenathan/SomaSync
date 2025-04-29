@@ -1,10 +1,18 @@
 import { useParams } from "react-router";
+import SessionContent from "@/sessions/sessionContent";
 
 function Session() {
-  let params = useParams();
+  const params = useParams();
+  const session = SessionContent.filter((session) => {
+    return session.id === Number(params.sessionid);
+  })[0] || {
+    title: `session ${params.sessionid} not found`,
+  };
   return(
     <div>
-      Session number {params.sessionid}
+      <h1>{session.title}</h1>
+      <h4>{session.subtitle}</h4>
+      {session.content}
     </div>
   )
 }
