@@ -22,6 +22,7 @@ function SessionChapter() {
   return(
     <div>
       <div dangerouslySetInnerHTML={{__html: post.content.rendered}}/>
+      <p>{post.slug.slice(-1)}/{maxPosts}</p>
       <Link to={`/sessions/${params.sessionid}/${getNextChapterSlug()}`}>Next</Link>
     </div>
   )
