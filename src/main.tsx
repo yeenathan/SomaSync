@@ -12,11 +12,9 @@ createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<App/>}/>
-      <Route path='sessions'>
+      <Route path='sessions' element={<SessionLayout/>}>
         <Route index element={<SessionsHome/>}/>
-        <Route element={<SessionLayout/>}>
-          <Route path=':sessionid' element={<Session/>}/>
-        </Route>
+        <Route path=':sessionid' element={<Session/>}/>
       </Route>
     </Routes>
   </BrowserRouter>

@@ -1,12 +1,19 @@
-import { Outlet } from "react-router"; //children
+import { Outlet, Link } from "react-router"; //children
+import NavigationRail from "@/components/ui/navigationRail";
+import { getPages } from "@/utils/WP";
+
+const pages = await getPages();
 
 function SessionLayout() {
   return(
     <div>
+      <NavigationRail/>
       <div>
-        nav
+        <header>
+          <Link to="/sessions">Sessions</Link>
+        </header>
+        <Outlet context={pages}/>
       </div>
-      {<Outlet/>}
     </div>
   )
 }

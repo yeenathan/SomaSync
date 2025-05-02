@@ -1,8 +1,20 @@
+import { useOutletContext } from "react-router";
+import SessionCategory from "@/components/sessionCategory";
+import { Link } from "react-router";
+
 function SessionsHome() {
+  const pages:Array<any> = useOutletContext();
   return(
     <div>
-      <h1>sessions home</h1>
-      
+      {
+        pages.map((page:any, i:number) => {
+          return(
+            <Link to={`/sessions/${page.id}`}>
+              <SessionCategory key={i} title={page.title.rendered}/>
+            </Link>
+          ) 
+        })
+      }
     </div>
   )
 }
