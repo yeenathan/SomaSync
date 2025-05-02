@@ -1,8 +1,9 @@
 import { Outlet, Link } from "react-router"; //children
 import NavigationRail from "@/components/ui/navigationRail";
-import { getPages } from "@/utils/WP";
+import { getPosts, getCategories } from "@/utils/WP";
 
-const pages = await getPages();
+const posts = await getPosts();
+const categories = await getCategories();
 
 function SessionLayout() {
   return(
@@ -12,7 +13,7 @@ function SessionLayout() {
         <header>
           <Link to="/sessions">Sessions</Link>
         </header>
-        <Outlet context={pages}/>
+        <Outlet context={{posts, categories}}/>
       </div>
     </div>
   )
