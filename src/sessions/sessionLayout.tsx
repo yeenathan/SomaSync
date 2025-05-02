@@ -15,7 +15,7 @@ function SessionLayout() {
         </header>
         <div className="container flex flex-col mx-auto gap-8">
           <img src="https://placehold.co/600x400" style={{height: 400}}/>
-          <Outlet context={{posts, categories}}/>
+          <Outlet context={posts}/>
         </div>
       </div>
     </div>

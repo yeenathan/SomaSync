@@ -3,16 +3,21 @@ import SessionCategory from "@/components/sessionCategory";
 import { Link } from "react-router";
 
 function Sessions() {
-  const {posts, categories}:{posts: Array<any>, categories: Array<any>} = useOutletContext();
+  const posts: Array<any> = useOutletContext();
+  let postSessions: Array<any> = [];
+  for (let i of posts) {
+    postSessions.push(i.slug.slice(0,8));
+  }
+  const sessions = [...new Set(postSessions)];
   return(
     <div className="flex flex-col gap-4 min-w-full">
       {
-        categories.map((category:any, i:number) => {
+        sessions.map((session, key) => {
           return(
-            <Link to={`/sessions/${category.id}`}>
-              <SessionCategory key={i} title={category.name}/>
+            <Link key={key} to={`/sessions/${session}`}>
+              <SessionCategory title={session}/>
             </Link>
-          ) 
+          )
         })
       }
     </div>
