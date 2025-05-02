@@ -1,9 +1,8 @@
 import { Outlet, Link } from "react-router"; //children
 import NavigationRail from "@/components/ui/navigationRail";
-import { getPosts, getCategories } from "@/utils/WP";
+import { getPosts } from "@/utils/WP";
 
 const posts = await getPosts();
-const categories = await getCategories();
 
 function SessionLayout() {
   return(
