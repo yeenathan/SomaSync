@@ -8,12 +8,12 @@ function SessionHome() {
     return post.categories[0] === Number(params.sessionid);
   })
   return(
-    <div>
+    <div className="flex flex-col gap-4 min-w-full">
       {
         currentPosts.map((post, i) => {
           return(
             <Link to={`/sessions/${params.sessionid}/${post.id}`}>
-              <SessionCategory title={post.title.rendered} key={i}/>
+              <SessionCategory title={post.title.rendered} key={i} subtitle={post.excerpt.rendered}/>
             </Link>
           )
         })

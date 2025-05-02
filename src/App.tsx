@@ -8,9 +8,7 @@ function App() {
   return (
     <div className="flex h-screen">
       {/* Side Menu */}
-      <div className="hidden md:block w-20 border-r">
         <NavigationRail />
-      </div>
 
       {/* Main Section */}
       <div className="flex-1 flex flex-col gap-4 ">

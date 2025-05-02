@@ -1,8 +1,8 @@
 export default function SessionCategory({title, subtitle=null}) {
   return(
-    <div>
-      <h4>{title}</h4>
-      <h5>{subtitle}</h5>
+    <div className="border-b pb-12">
+      <h3 className="text-xl">{title}</h3>
+      <div dangerouslySetInnerHTML={{__html: subtitle}}></div>
     </div>
   )
 }

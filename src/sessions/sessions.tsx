@@ -5,7 +5,7 @@ import { Link } from "react-router";
 function Sessions() {
   const {posts, categories}:{posts: Array<any>, categories: Array<any>} = useOutletContext();
   return(
-    <div>
+    <div className="flex flex-col gap-4 min-w-full">
       {
         categories.map((category:any, i:number) => {
           return(

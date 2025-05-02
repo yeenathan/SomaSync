@@ -7,13 +7,16 @@ const categories = await getCategories();
 
 function SessionLayout() {
   return(
-    <div>
+    <div className="flex flex-row min-h-screen">
       <NavigationRail/>
-      <div>
-        <header>
-          <Link to="/sessions">Sessions</Link>
+      <div className="p-8 min-w-full">
+        <header className="pb-4">
+          <Link to="/sessions"><h1>Sessions</h1></Link>
         </header>
-        <Outlet context={{posts, categories}}/>
+        <div className="container flex flex-col mx-auto gap-8">
+          <img src="https://placehold.co/600x400" style={{height: 400}}/>
+          <Outlet context={{posts, categories}}/>
+        </div>
       </div>
     </div>
   )
