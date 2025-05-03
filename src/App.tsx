@@ -15,16 +15,16 @@ function App() {
 
         <div className="flex justify-between items-center pt-8 pl-5">
           <MobileMenu /> 
-          <h1 className="text-xl w-full pl-2">SomaSync Home</h1>
-          <h1 className="text-xl pt-8 pl-12 invisible md:visible ">SomaSync Home</h1>
+          <h1 className="text-xl w-full pl-2 md:visible invisible">SomaSync Home</h1>
+          <h1 className="text-xl pt-8 pl-12 md:invisible visible ">SomaSync Home</h1>
         </div>
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col justify-between m-5 lg:m-0">
-          {/* Wrapper: Use flex to distribute space */}
+ 
           <div className="relative flex-1 flex flex-col   ">
 
-            {/* Welcome Component */}
+
             <div className="mb-3 mt-3 md:mb-0 ">
               <Welcome />
             </div>
