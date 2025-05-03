@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
-const items = ['Sessions', 'Journal', 'Settings'];
+const items = [ 
+  {label: 'Sessions', path: '/sessions'},
+  {label: 'Journal', path: '/journal'},
+  {label: 'Settings', path: '/settings'},
+];
 
 const NavigationRail = () => {
-  const [selectedItem, setSelectedItem] = useState('');
+const navigate = useNavigate();
 
   return (
     <div className="w-20 flex flex-col items-center py-11 ">
@@ -15,18 +20,14 @@ const NavigationRail = () => {
 
 
       <div className="mt-4 space-y-6">
-        {items.map((label) => (
+        {items.map((item) => (
           <button
-            key={label}
-            onClick={() => setSelectedItem(label)} 
-            className={`flex flex-col items-center w-10 h-10 text-sm transition ${
-              selectedItem === label
-                ? 'text-blue-600 bg-blue-50 rounded-md font-bold'
-                : 'text-gray-500'
-            } `}
+            key={item.label}
+            onClick={() => navigate(item.path)}
+            className="flex flex-col items-center w-10 h-10 text-sm text-gray-500 hover:text-blue-600 transition"
           >
             <StarOutlineIcon className="w-6 h-6 mb-1" />
-            {label}
+            {item.label}
           </button>
         ))}
       </div>
