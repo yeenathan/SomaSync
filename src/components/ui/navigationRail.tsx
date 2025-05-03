@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import { Link } from 'react-router';
 
 const items = [ 
   {label: 'Sessions', path: '/sessions'},
@@ -13,10 +14,11 @@ const NavigationRail = () => {
 const navigate = useNavigate();
 
   return (
-    <div className="w-20 flex flex-col items-center py-11 ">
-      <button className="p-2 rounded hover:bg-gray-100" aria-label="Menu">
-        <MenuIcon className="w-6 h-6 text-gray-700" />
-      </button>
+    <div className="hidden md:block w-20 min-h-full border-r">
+      <div className="w-20 flex flex-col items-center py-11 ">
+        <Link to="/" className="p-2 rounded hover:bg-gray-100" aria-label="Menu">
+          <MenuIcon className="w-6 h-6 text-gray-700" />
+        </Link>
 
 
       <div className="mt-4 space-y-6">
