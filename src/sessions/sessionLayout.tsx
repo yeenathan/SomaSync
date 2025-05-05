@@ -1,5 +1,6 @@
-import { Outlet, useOutletContext, Link, useParams } from "react-router"; //children
+import { Outlet, Link, useParams } from "react-router"; //children
 import NavigationRail from "@/components/ui/navigationRail";
+import SectionHead from "@/components/sectionHead";
 import { getPosts, getCategories, getCategoryNameFromID } from "@/utils/WP";
 
 const posts = await getPosts();
@@ -18,11 +19,10 @@ function SessionLayout() {
       <NavigationRail/>
       <div className="p-8 min-w-full">
         <header className="pb-4">
-          <Link to="/sessions"><h2>Sessions</h2></Link>
+          <Link to="/sessions" className="text-3xl"><h2>Sessions</h2></Link>
         </header>
         <div className="container flex flex-col mx-auto gap-8">
-          <h1>{header}</h1>
-          <img src="https://placehold.co/600x400" style={{height: 400}}/>
+          <SectionHead header={header}/>
           <Outlet context={{posts, categories}}/>
         </div>
       </div>
