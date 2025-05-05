@@ -3,7 +3,7 @@ import SessionCategory from "@/components/sessionCategory";
 
 function SessionHome() {
   const params = useParams();
-  const posts: Array<any> = useOutletContext();
+  const {posts, categories}:{posts:Array<any>, categories:Array<any>} = useOutletContext();
   const currentPosts = posts.filter((post) => {
     return post.slug.slice(0,8) === params.sessionid;
   })

@@ -1,4 +1,4 @@
-export default function SessionCategory({title, subtitle=null}) {
+export default function SessionCategory({title, subtitle=null}:{title:string, subtitle:any}) {
   return(
     <div className="border-b pb-12">
       <h3 className="text-xl">{title}</h3>

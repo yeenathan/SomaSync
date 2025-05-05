@@ -1,6 +1,6 @@
 import { Link, useOutletContext, useParams } from "react-router";
 
-function SessionChapter() {
+function SessionContent() {
   function getNextChapterSlug() {
     const next = Number(post.slug.slice(-1))+1;
     if (next > maxPosts) return "";
@@ -8,7 +8,7 @@ function SessionChapter() {
   }
   
   const params = useParams();
-  const posts: Array<any> = useOutletContext();
+  const {posts, categories}:{posts:Array<any>, categories:Array<any>} = useOutletContext();
 
   const filteredPosts = posts.filter((post) => {
     return post.slug.slice(0,8) === params.sessionid;
@@ -28,4 +28,4 @@ function SessionChapter() {
   )
 }
 
-export default SessionChapter;
+export default SessionContent;

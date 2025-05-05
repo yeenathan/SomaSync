@@ -8,4 +8,10 @@ async function getCategories() {
   return content;
 }
 
-export { getPosts, getCategories };
+function getCategoryNameFromID(id:number, categories: Array<any>) {
+  return categories.filter((category:any) => {
+    return category.id === id;
+  })[0].name;
+}
+
+export { getPosts, getCategories, getCategoryNameFromID };

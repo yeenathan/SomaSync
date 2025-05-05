@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+:root {
+  --blue-primary: #BFECF9;
+  --blue-secondary: #64B4CB;
+  --blue-tertiary: #005E79;
+
+  --purple-primary: #E1C4EE;
+  --purple-secondary: #B091BD;
+  --purple-tertiary: #56007A;
+  
+  --orange-primary: #FFBE7A;
+  --orange-secondary: #DB8933;
+  --orange-tertiary: #7A3E00;
+
+  --green-primary: #AEE77F;
+  --green-secondary: #7EB452;
+  --green-tertiary: #275502;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
 }

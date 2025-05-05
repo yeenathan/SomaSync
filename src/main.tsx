@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import Sessions from '@/sessions/sessions.tsx';
 import SessionLayout from '@/sessions/sessionLayout.tsx';
 import SessionHome from '@/sessions/sessionHome.tsx';
-import SessionChapter from '@/sessions/sessionChapter.tsx';
+import SessionChapter from '@/sessions/sessionContent.tsx';
 import JournalHome from '@/journal/journalHome.tsx';
 
 createRoot(document.getElementById('root')!).render(
