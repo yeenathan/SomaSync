@@ -2,10 +2,12 @@ import NavigationRail from "../components/ui/navigationRail";
 import Welcome from "../components/ui/welcome";
 import MenuButtons from "../components/ui/menuButtons";
 import MobileMenu from "../components/ui/mobileMenu";
+import { Link } from "react-router";
 
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 
 function JournalHome() {
-
   return (
     <div className="flex h-screen">
       {/* Side Menu */}
@@ -14,54 +16,66 @@ function JournalHome() {
       </div>
 
       {/* Main Section */}
-      <div className="flex-1 flex flex-col gap-4 ">
 
+      <div className="flex-1 flex flex-col gap-4 ">
         {/* heading ?*/}
-        <div className="flex justify-between items-center pt-8 pl-5">
-          <MobileMenu />
-          {/* desktop */}
-          <h1 className="text-xl w-full pl-2 md:visible invisible">Journal</h1>
-          <h1 className="text-xl pt-8 pl-12 md:invisible visible ">Journal</h1>
+        <div className="flex items-center pt-8 pl-5 ">
+          <Link to={`/`} className="flex place-items-center">
+            <ArrowBackIcon className="" />
+
+            <h1 className=" pl-2 text-xl">Journal</h1>
+          </Link>
         </div>
 
         {/* Main Content */}
-        <div className="flex flex-col justify-between m-5 ">
-
-          {/* Top part*/}
-          <div className="flex flex-row items-stretch gap-4">
-            <button className="w-1/2 h-[152px] aspect-[577/152] rounded-md bg-[#ECE6F0]">
+        <div className="flex flex-col justify-between m-5">
+          {/* Top part */}
+          <div className="flex md:flex-row flex-col items-stretch gap-4">
+          
+            <Link
+              to={`/journalEntry`}
+              className="md:w-1/2 w-full h-[152px] md:aspect-[577/152] rounded-md bg-[#ECE6F0] order-1"
+            >
+              <CreateOutlinedIcon />
               Write new entry
-            </button>
+            </Link>
 
-            <div className="w-1/2 h-[152px] flex flex-col justify-between ">
+            {/* Daily Intentions mobile */}
+            <div className="flex flex-col mt-4 md:hidden order-2">
+              <p>Daily Intentions</p>
+              <div className="flex gap-2 h-[223px] w-full">
+                <div className="basis-3/6 bg-black rounded-2xl"></div>
+                <div className="basis-3/6 bg-black rounded-2xl"></div>
+                <div className="basis-1/6 bg-black rounded-2xl"></div>
+                <div className="basis-1/12 bg-black rounded-2xl"></div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-1/2 h-[152px] flex flex-col justify-between order-3">
               <p>How are you feeling today?</p>
               <div className="rounded-md bg-[#D9D9D9] flex-1 w-full"></div>
             </div>
           </div>
 
-
-          {/* Middle part*/}
-          <div className="flex flex-col mt-10">
+          {/* Daily Intentions desktop */}
+          <div className="hidden md:flex flex-col mt-10">
             <p>Daily Intentions</p>
-
-            {/*carousel */}
             <div className="flex gap-2 h-[223px] w-full">
-  <div className="basis-3/6 bg-black rounded-2xl"></div>
-  <div className="basis-3/6 bg-black rounded-2xl"></div>
-  <div className="basis-1/6 bg-black rounded-2xl"></div>
-  <div className="basis-1/12 bg-black rounded-2xl"></div>
-</div>
-
+              <div className="basis-3/6 bg-black rounded-2xl"></div>
+              <div className="basis-3/6 bg-black rounded-2xl"></div>
+              <div className="basis-1/6 bg-black rounded-2xl"></div>
+              <div className="basis-1/12 bg-black rounded-2xl"></div>
+            </div>
           </div>
 
-          {/* Bottom part*/}
+          {/* Bottom part */}
           <div className="mt-10">
             <p>Module Reflections</p>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default JournalHome;
