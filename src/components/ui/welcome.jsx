@@ -1,5 +1,5 @@
 function Welcome() {
-  //this is a placeholder/ to connect with account but its here 
+  //this is a placeholder to connect with account but its here 
   return (
     <div className="text-2xl ">
       <p>Welcome, </p>

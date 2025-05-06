@@ -1,7 +1,4 @@
 import NavigationRail from "../components/ui/navigationRail";
-import Welcome from "../components/ui/welcome";
-import MenuButtons from "../components/ui/menuButtons";
-import MobileMenu from "../components/ui/mobileMenu";
 import { Link } from "react-router";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -16,7 +13,6 @@ function JournalHome() {
       </div>
 
       {/* Main Section */}
-
       <div className="flex-1 flex flex-col gap-4 ">
         {/* heading ?*/}
         <div className="flex items-center pt-8 pl-5 ">
@@ -31,7 +27,7 @@ function JournalHome() {
         <div className="flex flex-col justify-between m-5">
           {/* Top part */}
           <div className="flex md:flex-row flex-col items-stretch gap-4">
-          
+
             <Link
               to={`/journalEntry`}
               className="md:w-1/2 w-full h-[152px] md:aspect-[577/152] rounded-md bg-[#ECE6F0] order-1"
