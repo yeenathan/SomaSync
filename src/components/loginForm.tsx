@@ -1,7 +1,7 @@
-import { registerNewUser } from "@/utils/WP";
+import { login } from "@/utils/WP";
 import { useState } from "react";
 
-function RegistrationForm() {
+function LoginForm() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -18,7 +18,7 @@ function RegistrationForm() {
   async function handleSubmit(e:any) {
     e.preventDefault();
     try {
-      registerNewUser(formData.username, formData.password, formData.email);
+      login(formData.username, formData.password, formData.email);
     }
     catch (err) {
       console.log(err);
@@ -26,15 +26,15 @@ function RegistrationForm() {
   }
   return(
     <div>
-      <p>Registration:</p>
+      <p>Login:</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="username" required />
         <input type="text" name="password" value={formData.password} onChange={handleChange} placeholder="password" required />
-        <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="email"/>
+        <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="email" />
         <button type="submit">Submit</button>
       </form>
     </div>
   )
 }
 
-export default RegistrationForm;
+export default LoginForm;

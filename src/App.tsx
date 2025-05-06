@@ -6,9 +6,10 @@ import MenuButtons from "./components/ui/menuButtons";
 import MobileMenu from "./components/ui/mobileMenu";
 import { useState } from "react";
 import RegistrationForm from "./components/registrationForm";
+import LoginForm from "./components/loginForm";
+import { getJWTToken } from "./utils/WP";
 
 function App() {
-  
 
   return (
     <div className="flex h-screen">
@@ -28,6 +29,7 @@ function App() {
         <div className="flex-1 flex flex-col justify-between m-5 lg:m-0">
           <div className="relative flex-1 flex flex-col   ">
             <RegistrationForm/>
+            <LoginForm/>
             <div className="mb-3 mt-3 md:mb-0 ">
               <Welcome />
             </div>

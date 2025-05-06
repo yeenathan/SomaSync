@@ -14,7 +14,7 @@ function getCategoryNameFromID(id:number, categories: Array<any>) {
   })[0].name;
 }
 
-async function RegisterNewUser(username: string, password: string, email: string) {
+async function registerNewUser(username: string, password: string, email: string) {
   const res = await fetch("https://52.13.30.19/wp-json/custom/v1/register", {
     method: "POST",
     headers: {
@@ -28,4 +28,49 @@ async function RegisterNewUser(username: string, password: string, email: string
   });
 }
 
-export { getPosts, getCategories, getCategoryNameFromID, RegisterNewUser };
+/**
+ * Create and store JWT token to cookie
+ * 
+ * @param username 
+ * @param password 
+ * @param email 
+ */
+async function login(username: string, password: string, email: string) {
+  try {
+    const res = await fetch("https://52.13.30.19/wp-json/jwt-auth/v1/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "username": username,
+        "password": password,
+        "email": email,
+      }),
+    });
+  
+    if (!res.ok) {
+      throw new Error("Log in failed");
+    }
+  
+    const data = await res.json();
+    const token = data.token;
+  
+    document.cookie = `jwt=${token}; path=/; max-age=10800`; //3 hours
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+function getJWTToken() {
+  const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+    const [key, value] = cookie.split("=");
+    acc[key] = value;
+    return acc;
+  }, {});
+  
+  return cookies.jwt;
+}
+
+export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getJWTToken };
