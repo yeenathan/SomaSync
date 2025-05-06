@@ -1,5 +1,8 @@
 import NavigationRail from "../components/ui/navigationRail";
-import MobileMenu from "../components/ui/mobileMenu";
+import { Link } from "react-router";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 
 function ProgressHome() {
   return (
@@ -11,53 +14,59 @@ function ProgressHome() {
 
       {/* Main Section */}
       <div className="flex-1 flex flex-col gap-4 ">
-
-        {/* heading ?*/}
-        <div className="flex justify-between items-center pt-8 pl-5">
-          <MobileMenu />
-          {/* desktop */}
-          <h1 className="text-xl w-full pl-2 md:visible invisible">Journal</h1>
-          <h1 className="text-xl pt-8 pl-12 md:invisible visible ">Journal</h1>
+        {/* heading */}
+        <div className="flex items-center pt-8 pl-5 ">
+          <Link to={`/`} className="flex place-items-center">
+            <ArrowBackIcon className="" />
+            <h1 className=" pl-2 text-xl">Progress</h1>
+          </Link>
         </div>
 
         {/* Main Content */}
-        <div className="flex flex-col justify-between m-5 ">
+        <div className="flex flex-col justify-between md:mr-12 m-4">
+          {/* Top part */}
+          <div className="flex md:flex-row flex-col items-stretch gap-4">
+            {/* Almost Done - Mobile Only */}
+            <div className="flex flex-col mt-4 md:hidden order-2">
+              <div className="flex bg-black rounded-2xl h-[107px] w-full"></div>
+            </div>
 
-          {/* Top part*/}
-          <div className="flex flex-row items-stretch gap-4">
-            <button className="w-1/2 h-[152px] aspect-[577/152] rounded-md bg-[#ECE6F0]">
-              Write new entry
-            </button>
-
-            <div className="w-1/2 h-[152px] flex flex-col justify-between ">
-              <p>How are you feeling today?</p>
-              <div className="rounded-md bg-[#D9D9D9] flex-1 w-full"></div>
+            {/* Main Banner */}
+            <div className="w-full h-[205px] flex flex-col justify-between order-3">
+              <div className="rounded-2xl bg-[#D9D9D9] flex-1 w-full"></div>
             </div>
           </div>
 
+          {/* Desktop Layout */}
+          <div className="hidden md:flex flex-row align-center gap-4 mt-10">
 
-          {/* Middle part*/}
-          <div className="flex flex-col mt-10">
-            <p>Daily Intentions</p>
-
-            {/*carousel */}
-            <div className="flex gap-2 h-[223px] w-full">
-              <div className="basis-3/6 bg-black rounded-2xl"></div>
-              <div className="basis-3/6 bg-black rounded-2xl"></div>
-              <div className="basis-1/6 bg-black rounded-2xl"></div>
-              <div className="basis-1/12 bg-black rounded-2xl"></div>
+            {/* Completed Modules */}
+            <div className="w-1/2 flex flex-col ml-4">
+              <p className="mb-2">Completed Modules</p>
+              <div className="flex gap-2 ">
+              
+              </div>
             </div>
-
+            {/** Almost Done */}
+            <div className="w-1/2 flex flex-col">
+              <div className="flex gap-2 h-[324px] w-full">
+                <div className="flex-1 bg-black rounded-2xl"></div>
+              </div>
+            </div>
           </div>
 
-          {/* Bottom part*/}
-          <div className="mt-10">
-            <button>Module Reflections</button>
+          {/* Mobile Only - Completed Modules*/}
+          <div className="mt-10 md:hidden">
+            <p>Completed Modules</p>
+            <div className="flex gap-2 ">
+              
+            </div>
           </div>
         </div>
+
       </div>
     </div>
-  )
+  );
 }
 
-export default ProgressHome; 
+export default ProgressHome;

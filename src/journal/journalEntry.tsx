@@ -18,7 +18,7 @@ function JournalEntry() {
         {/* heading ?*/}
         <div className="flex items-center pt-8 pl-5">
           <Link to={`/journal`}className="flex place-items-center">
-          <ArrowBackIcon className="text-gray-700" /> 
+          <ArrowBackIcon className="" /> 
             <h1 className="text-xl w-full pl-2 ">
               {" "}
               New Journal
