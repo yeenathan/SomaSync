@@ -1,13 +1,14 @@
 "use client";
 
-import { Button } from "./components/ui/button";
 import NavigationRail from "./components/ui/navigationRail";
 import Welcome from "./components/ui/welcome";
 import MenuButtons from "./components/ui/menuButtons";
 import MobileMenu from "./components/ui/mobileMenu";
 import { useState } from "react";
+import RegistrationForm from "./components/registrationForm";
 
 function App() {
+  
 
   return (
     <div className="flex h-screen">
@@ -26,6 +27,7 @@ function App() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col justify-between m-5 lg:m-0">
           <div className="relative flex-1 flex flex-col   ">
+            <RegistrationForm/>
             <div className="mb-3 mt-3 md:mb-0 ">
               <Welcome />
             </div>

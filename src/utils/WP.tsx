@@ -14,4 +14,18 @@ function getCategoryNameFromID(id:number, categories: Array<any>) {
   })[0].name;
 }
 
-export { getPosts, getCategories, getCategoryNameFromID };
+async function RegisterNewUser(username: string, password: string, email: string) {
+  const res = await fetch("https://52.13.30.19/wp-json/custom/v1/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "username": username,
+      "password": password,
+      "email": email,
+    }),
+  });
+}
+
+export { getPosts, getCategories, getCategoryNameFromID, RegisterNewUser };
