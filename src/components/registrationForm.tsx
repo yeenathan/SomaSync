@@ -29,7 +29,7 @@ function RegistrationForm() {
       <p>Registration:</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="username" required />
-        <input type="text" name="password" value={formData.password} onChange={handleChange} placeholder="password" required />
+        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="password" required />
         <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="email"/>
         <button type="submit">Submit</button>
       </form>

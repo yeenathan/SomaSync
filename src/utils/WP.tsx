@@ -54,23 +54,29 @@ async function login(username: string, password: string, email: string) {
     }
   
     const data = await res.json();
-    const token = data.token;
   
-    document.cookie = `jwt=${token}; path=/; max-age=10800`; //3 hours
+    document.cookie = `jwt=${data.token}; path=/; max-age=10800`; //3 hours
+    document.cookie = `username=${data.user_display_name}; path=/; max-age=10800`
   }
   catch (err) {
     console.log(err);
   }
 }
 
-function getJWTToken() {
-  const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+function getCookies() {
+  return document.cookie.split("; ").reduce((acc, cookie) => {
     const [key, value] = cookie.split("=");
     acc[key] = value;
     return acc;
   }, {});
-  
-  return cookies.jwt;
 }
 
-export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getJWTToken };
+function getJWTToken() {
+  return getCookies().jwt;
+}
+
+function getUsername() {
+  return getCookies().username;
+}
+
+export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getJWTToken, getUsername };

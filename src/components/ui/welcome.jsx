@@ -1,9 +1,10 @@
+import { getUsername } from "@/utils/WP";
+
 function Welcome() {
-  //this is a placeholder to connect with account but its here 
+  console.log(getUsername());
   return (
     <div className="text-2xl ">
-      <p>Welcome, </p>
-      <p>[NAME]</p>
+      <p>Welcome, { getUsername() }</p>
     </div>
   )
 }
