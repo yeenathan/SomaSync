@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 
 const items = [
   { label: 'Sessions', path: '/sessions' },
+  { label: 'Progress', path: '/progress' },
   { label: 'Journal', path: '/journal' },
   { label: 'Settings', path: '/settings' },
 ];
