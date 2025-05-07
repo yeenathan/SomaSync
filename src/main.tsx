@@ -13,25 +13,35 @@ import ProgressHome from "./progress/progressHome.tsx";
 import Settings from "./settings";
 
 import { FontSizeProvider } from "./components/fontSizeContext.tsx";
+import { AuthContextProvider } from "./utils/authContext.tsx";
+import { LoginPage, RegisterPage } from "./registerLogin.tsx";
+import PrivateRouteLayout from "./utils/privateRouteLayout.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <FontSizeProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/journal" element={<JournalHome />} />
-        <Route path="/journalEntry" element={<JournalEntry />} />
-        <Route path="/progress" element={<ProgressHome />} />
-        <Route path="sessions" element={<SessionLayout />}>
-          <Route index element={<Sessions />} />
-          <Route path="/sessions/:sessionid" element={<SessionHome />} />
-          <Route
-            path="/sessions/:sessionid/:chapterid"
-            element={<SessionChapter />}
-          />
-        </Route>
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-    </BrowserRouter>
-  </FontSizeProvider>
+  <AuthContextProvider>
+    <FontSizeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/register" element={<RegisterPage/>}/>
+
+          <Route element={<PrivateRouteLayout/>}>
+            <Route path="/" element={<App />}/>
+            <Route path="/journal" element={<JournalHome />} />
+            <Route path="/journalEntry" element={<JournalEntry />} />
+            <Route path="/progress" element={<ProgressHome />} />
+            <Route path="sessions" element={<SessionLayout />}>
+              <Route index element={<Sessions />} />
+              <Route path="/sessions/:sessionid" element={<SessionHome />} />
+              <Route
+                path="/sessions/:sessionid/:chapterid"
+                element={<SessionChapter />}
+              />
+            </Route>
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </FontSizeProvider>
+  </AuthContextProvider>
 );

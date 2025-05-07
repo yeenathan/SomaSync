@@ -4,12 +4,16 @@ import NavigationRail from "./components/ui/navigationRail";
 import Welcome from "./components/ui/welcome";
 import MenuButtons from "./components/ui/menuButtons";
 import MobileMenu from "./components/ui/mobileMenu";
-import { useState } from "react";
-import RegistrationForm from "./components/registrationForm";
-import LoginForm from "./components/loginForm";
-import { getJWTToken } from "./utils/WP";
+import { useAuth } from "./utils/authContext";
+import { useNavigate } from "react-router";
 
 function App() {
+  const {setUnauthorized} = useAuth();
+  const navigate = useNavigate();
+  function handleClick() {
+    setUnauthorized();
+    navigate("/");
+  }
 
   return (
     <div className="flex h-screen">
@@ -28,8 +32,7 @@ function App() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col justify-between m-5 lg:m-0">
           <div className="relative flex-1 flex flex-col   ">
-            <RegistrationForm/>
-            <LoginForm/>
+            <button onClick={handleClick}>log out</button>
             <div className="mb-3 mt-3 md:mb-0 ">
               <Welcome />
             </div>

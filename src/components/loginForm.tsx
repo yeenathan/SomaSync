@@ -1,5 +1,7 @@
 import { login } from "@/utils/WP";
 import { useState } from "react";
+import { useAuth } from "@/utils/authContext";
+import { useNavigate } from "react-router";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -7,6 +9,8 @@ function LoginForm() {
     password: "",
     email: "",
   });
+  const { setAuthorized } = useAuth();
+  const navigate = useNavigate();
 
   function handleChange(e:any) {
     setFormData({
@@ -19,6 +23,8 @@ function LoginForm() {
     e.preventDefault();
     try {
       login(formData.username, formData.password, formData.email);
+      setAuthorized();
+      navigate("/");
     }
     catch (err) {
       console.log(err);
