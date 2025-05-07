@@ -1,15 +1,22 @@
+import { Link } from "react-router";
 import LoginForm from "./components/loginForm";
 import RegistrationForm from "./components/registrationForm";
 
 function LoginPage() {
   return(
-    <LoginForm/>
+    <div>
+      <LoginForm/>
+      <p>Don't have an account? <Link to={"/register"}>Register</Link></p>
+    </div>
   )
 }
 
 function RegisterPage() {
   return(
-    <RegistrationForm/>
+    <div>
+      <RegistrationForm/>
+      <p>Already registered? <Link to={"/login"}>Log in</Link></p>
+    </div>
   )
 }
 
