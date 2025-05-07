@@ -1,5 +1,6 @@
-import { Link, useOutletContext, useParams } from "react-router";
+import { Link, useOutletContext, useParams, Outlet } from "react-router";
 import Category from "@/components/category";
+import { getCategoryNameFromID } from "@/utils/WP";
 
 function SessionHome() {
   const params = useParams();
@@ -18,6 +19,7 @@ function SessionHome() {
           )
         })
       }
+           <Outlet />
     </div>
   )
 }

@@ -5,15 +5,19 @@ import { getCategoryNameFromID } from "@/utils/WP";
 
 function Sessions() {
   const {posts, categories}:{posts:Array<any>, categories:Array<any>} = useOutletContext();
+  const ACTIVITY_CATEGORY_ID = 26;
   let sessions: Array<any> = [];
+
   for (let i of posts) {
-    if (sessions.some(session => session.sessionid === i.slug.slice(0,8))) continue;
-    sessions.push(
-      {
-        sessionid: i.slug.slice(0,8),
-        title: getCategoryNameFromID(i.categories[0], categories)
-      }
-    );
+     if (i.categories.includes(ACTIVITY_CATEGORY_ID)) continue;
+    const sessionSlug = i.slug.slice(0, 8);
+
+    if (sessions.some(session => session.sessionid === sessionSlug)) continue;
+
+    sessions.push({
+      sessionid: sessionSlug,
+      title: getCategoryNameFromID(i.categories[0], categories)
+    });
   }
 
   return(

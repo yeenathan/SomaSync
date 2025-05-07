@@ -7,6 +7,7 @@ import Sessions from "@/sessions/sessions.tsx";
 import SessionLayout from "@/sessions/sessionLayout.tsx";
 import SessionHome from "@/sessions/sessionHome.tsx";
 import SessionContent from "@/sessions/sessionContent.tsx";
+import SessionActivity from "./sessions/sessionActivities.tsx";
 import JournalHome from "@/journal/journalHome.tsx";
 import JournalEntry from "./journal/journalEntry.tsx";
 import ProgressHome from "./progress/progressHome.tsx";
@@ -22,22 +23,21 @@ createRoot(document.getElementById("root")!).render(
     <FontSizeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/register" element={<RegisterPage/>}/>
-
-          <Route element={<PrivateRouteLayout/>}>
-            <Route path="/" element={<App />}/>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route element={<PrivateRouteLayout />}>
+            <Route path="/" element={<App />} />
             <Route path="/journal" element={<JournalHome />} />
             <Route path="/journalEntry" element={<JournalEntry />} />
             <Route path="/progress" element={<ProgressHome />} />
+
             <Route path="sessions" element={<SessionLayout />}>
               <Route index element={<Sessions />} />
-              <Route path="/sessions/:sessionid" element={<SessionHome />} />
-              <Route
-                path="/sessions/:sessionid/:chapterid"
-                element={<SessionContent />}
-              />
+              <Route path=":sessionid" element={<SessionHome />} />
+              <Route path=":sessionid/:chapterid" element={<SessionContent />} />
+              <Route path=":sessionid/:activityid" element={<SessionActivity />} />  // Route for activity under a session
             </Route>
+            
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Routes>

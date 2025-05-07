@@ -14,6 +14,7 @@ function getCategoryNameFromID(id:number, categories: Array<any>) {
   })[0].name;
 }
 
+
 async function registerNewUser(username: string, password: string, email: string) {
   const res = await fetch("https://52.13.30.19/wp-json/custom/v1/register", {
     method: "POST",
