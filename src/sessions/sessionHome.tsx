@@ -1,5 +1,5 @@
 import { Link, useOutletContext, useParams } from "react-router";
-import SessionCategory from "@/components/sessionCategory";
+import Category from "@/components/category";
 
 function SessionHome() {
   const params = useParams();
@@ -13,7 +13,7 @@ function SessionHome() {
         currentPosts.map((post, i) => {
           return(
             <Link key={i} to={`/sessions/${params.sessionid}/${post.slug}`}>
-              <SessionCategory title={post.title.rendered} subtitle={post.excerpt.rendered}/>
+              <Category title={post.title.rendered} subtitle={post.excerpt.rendered}/>
             </Link>
           )
         })

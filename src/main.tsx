@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import Sessions from "@/sessions/sessions.tsx";
 import SessionLayout from "@/sessions/sessionLayout.tsx";
 import SessionHome from "@/sessions/sessionHome.tsx";
-import SessionChapter from "@/sessions/sessionContent.tsx";
+import SessionContent from "@/sessions/sessionContent.tsx";
 import JournalHome from "@/journal/journalHome.tsx";
 import JournalEntry from "./journal/journalEntry.tsx";
 import ProgressHome from "./progress/progressHome.tsx";
@@ -35,7 +35,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/sessions/:sessionid" element={<SessionHome />} />
               <Route
                 path="/sessions/:sessionid/:chapterid"
-                element={<SessionChapter />}
+                element={<SessionContent />}
               />
             </Route>
             <Route path="/settings" element={<Settings />} />

@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router";
-import SessionCategory from "@/components/sessionCategory";
+import Category from "@/components/category";
 import { Link } from "react-router";
 import { getCategoryNameFromID } from "@/utils/WP";
 
@@ -22,7 +22,7 @@ function Sessions() {
         sessions.map((session, key) => {
           return(
             <Link key={key} to={`/sessions/${session.sessionid}`}>
-              <SessionCategory title={session.title} subtitle={null}/>
+              <Category title={session.title} subtitle={null}/>
             </Link>
           )
         })
