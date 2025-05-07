@@ -22,8 +22,10 @@ function LoginForm() {
   async function handleSubmit(e:any) {
     e.preventDefault();
     try {
-      login(formData.username, formData.password, formData.email);
+      await login(formData.username, formData.password, formData.email);
       setAuthorized();
+
+      // await fetchUserInfo();
       navigate("/");
     }
     catch (err) {

@@ -55,8 +55,7 @@ async function login(username: string, password: string, email: string) {
   
     const data = await res.json();
   
-    document.cookie = `jwt=${data.token}; path=/; max-age=10800`; //3 hours
-    document.cookie = `username=${data.user_display_name}; path=/; max-age=10800`
+    document.cookie = `jwt=${data.token}; path=/; max-age=3600`; //3 hours
   }
   catch (err) {
     console.log(err);
@@ -71,12 +70,15 @@ function getCookies() {
   }, {});
 }
 
-function getJWTToken() {
-  return getCookies().jwt;
+async function getUserInfo() {
+  const res = await fetch("https://52.13.30.19/wp-json/wp/v2/users/me", {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${getCookies().jwt}`
+    }
+  });
+  const data = await res.json();
+  return data;
 }
 
-function getUsername() {
-  return getCookies().username;
-}
-
-export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getJWTToken, getUsername };
+export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo };

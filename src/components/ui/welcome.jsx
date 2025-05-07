@@ -1,9 +1,10 @@
-import { getUsername } from "@/utils/WP";
+import { useAuth } from "@/utils/authContext.tsx";
 
 function Welcome() {
+  const { userInfo } = useAuth();
   return (
     <div className="text-2xl ">
-      <p>Welcome, { getUsername() }</p>
+      <p>Welcome, {userInfo.name}</p>
     </div>
   )
 }
