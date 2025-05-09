@@ -91,7 +91,7 @@ async function getUserProgress() {
     }
   });
   const data = await res.json();
-  return data.progress[0];
+  return data.progress[0] || "session1";
 }
 
 async function updateUserProgress(nextSession:string|undefined) {

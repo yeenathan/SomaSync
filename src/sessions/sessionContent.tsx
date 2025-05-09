@@ -1,5 +1,5 @@
 import { updateUserProgress } from "@/utils/WP";
-import { Link, useOutletContext, useParams } from "react-router";
+import { Link, useOutletContext, useParams, useNavigate } from "react-router";
 
 function SessionContent() {
   const params = useParams();
@@ -28,9 +28,12 @@ function SessionContent() {
 
   if (!post) return <p>Post not found</p>;
 
-  function handleclick(sessionid:string|undefined) {
+  const navigate = useNavigate();
+  async function handleclick(e, sessionid:string|undefined) {
+    e.preventDefault();
     const nextSessionID = sessionid.slice(0,7) + (Number(sessionid.slice(7, 8))+1);
-    updateUserProgress(nextSessionID);
+    await updateUserProgress(nextSessionID);
+    navigate("/sessions");
   }
 
   return (
@@ -41,7 +44,7 @@ function SessionContent() {
       {nextSlug ? 
       <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
       :
-      <Link to={`/sessions/`} onClick={() => handleclick(params.sessionid)}>Complete</Link>
+      <Link to={`/sessions/`} onClick={(e) => handleclick(e, params.sessionid)}>Complete</Link>
     }
     </div>
   );

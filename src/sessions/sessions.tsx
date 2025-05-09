@@ -30,6 +30,10 @@ function Sessions() {
     });
   }
 
+  if (!progress) {
+    return <p>Loading Sessions...</p>
+  }
+
   return(
     <div className="flex flex-col gap-4 min-w-full">
       {
