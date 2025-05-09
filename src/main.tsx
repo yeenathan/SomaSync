@@ -34,10 +34,10 @@ createRoot(document.getElementById("root")!).render(
             <Route path="sessions" element={<SessionLayout />}>
               <Route index element={<Sessions />} />
               <Route path=":sessionid" element={<SessionHome />} />
-              <Route path=":sessionid/:chapterid" element={<SessionContent />} />
-              <Route path=":sessionid/:activityid" element={<SessionActivity />} />  // Route for activity under a session
+              <Route path=":sessionid/chapter/:chapterid" element={<SessionContent />} />
+              <Route path=":sessionid/activity/:activityid" element={<SessionActivity />} />
             </Route>
-            
+
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Routes>
