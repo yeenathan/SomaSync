@@ -9,7 +9,7 @@ function LoginForm() {
     password: "",
     email: "",
   });
-  const { setAuthorized } = useAuth();
+  const { setAuthorized, fetchUserInfo } = useAuth();
   const navigate = useNavigate();
 
   function handleChange(e:any) {
@@ -25,7 +25,7 @@ function LoginForm() {
       await login(formData.username, formData.password, formData.email);
       setAuthorized();
 
-      // await fetchUserInfo();
+      await fetchUserInfo();
       navigate("/");
     }
     catch (err) {

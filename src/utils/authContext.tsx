@@ -7,6 +7,7 @@ interface AuthContextType {
   loading: boolean;
   setAuthorized: () => void;
   setUnauthorized: () => void;
+  fetchUserInfo: () => void;
 }
 
 const AuthContext = createContext<AuthContextType|undefined>(undefined);
@@ -16,19 +17,20 @@ function AuthContextProvider({children}:{children:ReactNode}) {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {  
-    async function fetchUserInfo() {
-      try {
-        const data = await getUserInfo();
-        setUserInfo(data);
-      } catch (error) {
-        console.error("Failed to fetch user info:", error);
-        setUserInfo(null);
-      }
-      finally {
-        setLoading(false);
-      }
+  async function fetchUserInfo() {
+    try {
+      const data = await getUserInfo();
+      setUserInfo(data);
+    } catch (error) {
+      console.error("Failed to fetch user info:", error);
+      setUserInfo(null);
     }
+    finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {  
     fetchUserInfo();
   }, []) 
 
@@ -41,7 +43,7 @@ function AuthContextProvider({children}:{children:ReactNode}) {
   }
 
   return(
-    <AuthContext.Provider value={{isAuthenticated, userInfo, loading, setAuthorized, setUnauthorized}}>
+    <AuthContext.Provider value={{isAuthenticated, userInfo, loading, setAuthorized, setUnauthorized, fetchUserInfo}}>
       {children}
     </AuthContext.Provider>
   )
