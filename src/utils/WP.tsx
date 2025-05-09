@@ -94,4 +94,18 @@ async function getUserProgress() {
   return data.progress[0];
 }
 
-export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo, getUserProgress };
+async function updateUserProgress(nextSession:string|undefined) {
+  const res = await fetch("https://52.13.30.19/wp-json/custom/v1/meta/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${getCookies().jwt}`
+    },
+    body: JSON.stringify({
+      "key": "progress",
+      "value": nextSession
+    })
+  });
+}
+
+export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo, getUserProgress, updateUserProgress };

@@ -1,3 +1,4 @@
+import { updateUserProgress } from "@/utils/WP";
 import { Link, useOutletContext, useParams } from "react-router";
 
 function SessionContent() {
@@ -27,14 +28,21 @@ function SessionContent() {
 
   if (!post) return <p>Post not found</p>;
 
+  function handleclick(sessionid:string|undefined) {
+    const nextSessionID = sessionid.slice(0,7) + (Number(sessionid.slice(7, 8))+1);
+    updateUserProgress(nextSessionID);
+  }
+
   return (
     <div>
       <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
     
       <p>{post.slug.slice(-1)}/{maxPosts}</p>
-      {nextSlug && (
+      {nextSlug ? 
       <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
-      )}
+      :
+      <Link to={`/sessions/`} onClick={() => handleclick(params.sessionid)}>Complete</Link>
+    }
     </div>
   );
 }
