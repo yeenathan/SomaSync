@@ -4,22 +4,24 @@ import { getCategoryNameFromID } from "@/utils/WP";
 
 function SessionHome() {
   const params = useParams();
-  const {posts, categories}:{posts:Array<any>, categories:Array<any>} = useOutletContext();
+  const { posts, categories }: { posts: Array<any>, categories: Array<any> } = useOutletContext();
   const currentPosts = posts.filter((post) => {
-    return post.slug.slice(0,8) === params.sessionid;
+    return post.slug.slice(0, 8) === params.sessionid;
   })
-  return(
+  return (
     <div className="flex flex-col gap-4 min-w-full">
       {
         currentPosts.map((post, i) => {
-          return(
-            <Link key={i} to={`/sessions/${params.sessionid}/${post.slug}`}>
-              <Category title={post.title.rendered} subtitle={post.excerpt.rendered}/>
+          const isActivity = post.slug.includes("activity");
+          const type = isActivity ? "activity" : "chapter";
+          return (
+            <Link key={i} to={`/sessions/${params.sessionid}/${type}/${post.slug}`}>
+              <Category title={post.title.rendered} subtitle={post.excerpt.rendered} />
             </Link>
-          )
+          );
         })
       }
-           <Outlet />
+      <Outlet />
     </div>
   )
 }

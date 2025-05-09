@@ -18,6 +18,7 @@ function Sessions() {
       sessionid: sessionSlug,
       title: getCategoryNameFromID(i.categories[0], categories)
     });
+    console.log("Post:", posts);
   }
 
   return(
@@ -27,7 +28,9 @@ function Sessions() {
           return(
             <Link key={key} to={`/sessions/${session.sessionid}`}>
               <Category title={session.title} subtitle={null}/>
+
             </Link>
+            
           )
         })
       }
