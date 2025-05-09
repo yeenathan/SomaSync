@@ -11,6 +11,7 @@ function LoginForm() {
   });
   const { setAuthorized, fetchUserInfo } = useAuth();
   const navigate = useNavigate();
+  const [failedLogin, setFailedLogin] = useState(false);
 
   function handleChange(e:any) {
     setFormData({
@@ -30,6 +31,7 @@ function LoginForm() {
     }
     catch (err) {
       console.log(err);
+      setFailedLogin(true);
     }
   }
   return(
@@ -41,6 +43,9 @@ function LoginForm() {
         <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="email" />
         <button type="submit">Submit</button>
       </form>
+      {
+        failedLogin && <p>Failed to log in</p>
+      }
     </div>
   )
 }

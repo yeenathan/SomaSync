@@ -58,8 +58,8 @@ async function login(username: string, password: string, email: string) {
   
     document.cookie = `jwt=${data.token}; path=/; max-age=3600`; //3 hours
   }
-  catch (err) {
-    console.log(err);
+  catch (err:any) {
+    throw new Error(err);
   }
 }
 
