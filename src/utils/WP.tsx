@@ -82,4 +82,16 @@ async function getUserInfo() {
   return data;
 }
 
-export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo };
+async function getUserProgress() {
+  const res = await fetch("https://52.13.30.19/wp-json/custom/v1/meta/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${getCookies().jwt}`
+    }
+  });
+  const data = await res.json();
+  return data.progress[0];
+}
+
+export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo, getUserProgress };

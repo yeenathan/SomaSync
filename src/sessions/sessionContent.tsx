@@ -33,7 +33,7 @@ function SessionContent() {
     
       <p>{post.slug.slice(-1)}/{maxPosts}</p>
       {nextSlug && (
-     <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
+      <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
       )}
     </div>
   );
