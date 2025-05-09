@@ -12,11 +12,17 @@ function Sessions() {
 
   useEffect(() => {
     async function fetchProgress() {
-      const progress = (await getUserMeta()).meta.progress[0] || "session1";
-      setProgress(progress);
+      try {
+        const userMeta = await getUserMeta();
+        const progress = userMeta.meta.progress[0];
+        setProgress(progress);
+      } catch (error) {
+        console.error("Failed to fetch user progress:", error);
+        setProgress("session1");
+      }
     }
     fetchProgress();
-  },[])
+  }, []);
 
   for (let i of posts) {
     if (i.categories.includes(ACTIVITY_CATEGORY_ID) || i.categories.includes(1)) continue;
