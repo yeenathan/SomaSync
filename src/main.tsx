@@ -17,6 +17,7 @@ import { FontSizeProvider } from "./components/fontSizeContext.tsx";
 import { AuthContextProvider } from "./utils/authContext.tsx";
 import { LoginPage, RegisterPage } from "./registerLogin.tsx";
 import PrivateRouteLayout from "./utils/privateRouteLayout.tsx";
+import Onboarding from "./onboarding.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <AuthContextProvider>
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/register" element={<RegisterPage />} />
           <Route element={<PrivateRouteLayout />}>
             <Route path="/" element={<App />} />
+            <Route path="/onboarding" element={<Onboarding />}/>
             <Route path="/journal" element={<JournalHome />} />
             <Route path="/journalEntry" element={<JournalEntry />} />
             <Route path="/progress" element={<ProgressHome />} />

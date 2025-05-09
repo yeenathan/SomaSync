@@ -4,7 +4,7 @@ async function getPosts() {
 }
 
 async function getCategories() {
-  const content = fetch("https://52.13.30.19/wp-json/wp/v2/categories?orderby=slug&order=asc").then((res) => res.json());
+  const content = fetch("https://52.13.30.19/wp-json/wp/v2/categories?orderby=slug&order=asc&exclude=1").then((res) => res.json());
   return content;
 }
 
@@ -82,7 +82,7 @@ async function getUserInfo() {
   return data;
 }
 
-async function getUserProgress() {
+async function getUserMeta() {
   const res = await fetch("https://52.13.30.19/wp-json/custom/v1/meta/", {
     method: "GET",
     headers: {
@@ -91,10 +91,10 @@ async function getUserProgress() {
     }
   });
   const data = await res.json();
-  return data.progress[0] || "session1";
+  return data;
 }
 
-async function updateUserProgress(nextSession:string|undefined) {
+async function updateUserMeta(key:string, value:any) {
   const res = await fetch("https://52.13.30.19/wp-json/custom/v1/meta/", {
     method: "POST",
     headers: {
@@ -102,10 +102,10 @@ async function updateUserProgress(nextSession:string|undefined) {
       "Authorization": `Bearer ${getCookies().jwt}`
     },
     body: JSON.stringify({
-      "key": "progress",
-      "value": nextSession
+      "key": key,
+      "value": value
     })
   });
 }
 
-export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo, getUserProgress, updateUserProgress };
+export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo, getUserMeta, updateUserMeta };

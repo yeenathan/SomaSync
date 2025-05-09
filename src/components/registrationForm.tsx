@@ -1,7 +1,10 @@
 import { registerNewUser } from "@/utils/WP";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function RegistrationForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -19,6 +22,7 @@ function RegistrationForm() {
     e.preventDefault();
     try {
       registerNewUser(formData.username, formData.password, formData.email);
+      navigate("/login");
     }
     catch (err) {
       console.log(err);

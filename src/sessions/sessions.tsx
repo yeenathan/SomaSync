@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router";
 import Category from "@/components/category";
 import { Link } from "react-router";
-import { getCategoryNameFromID, getUserProgress } from "@/utils/WP";
+import { getCategoryNameFromID, getUserMeta } from "@/utils/WP";
 import { useEffect, useState } from "react";
 
 function Sessions() {
@@ -12,14 +12,14 @@ function Sessions() {
 
   useEffect(() => {
     async function fetchProgress() {
-      const progress = await getUserProgress();
+      const progress = (await getUserMeta()).meta.progress[0] || "session1";
       setProgress(progress);
     }
     fetchProgress();
   },[])
 
   for (let i of posts) {
-     if (i.categories.includes(ACTIVITY_CATEGORY_ID)) continue;
+    if (i.categories.includes(ACTIVITY_CATEGORY_ID) || i.categories.includes(1)) continue;
     const sessionSlug = i.slug.slice(0, 8);
 
     if (sessions.some(session => session.sessionid === sessionSlug)) continue;

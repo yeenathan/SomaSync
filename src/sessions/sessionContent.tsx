@@ -1,4 +1,4 @@
-import { updateUserProgress } from "@/utils/WP";
+import { updateUserMeta } from "@/utils/WP";
 import { Link, useOutletContext, useParams, useNavigate } from "react-router";
 
 function SessionContent() {
@@ -32,7 +32,7 @@ function SessionContent() {
   async function handleclick(e, sessionid:string|undefined) {
     e.preventDefault();
     const nextSessionID = sessionid.slice(0,7) + (Number(sessionid.slice(7, 8))+1);
-    await updateUserProgress(nextSessionID);
+    await updateUserMeta("progress", nextSessionID);
     navigate("/sessions");
   }
 
