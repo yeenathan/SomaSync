@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router";
+import { Navigate, Outlet, useLocation } from "react-router";
 import { useAuth } from "./authContext";
 import { getUserMeta } from "./WP";
 import { useEffect, useState } from "react";
@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 function PrivateRouteLayout() {
   const {loading, isAuthenticated} = useAuth();
   const [onboarding, setOnboarding] = useState(null);
+  const [metaLoading, setMetaLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchUserMeta() {
@@ -18,20 +20,25 @@ function PrivateRouteLayout() {
       catch (e) {
         setOnboarding(false);
       }
+      finally {
+        setMetaLoading(false);
+      }
     }
-    if (isAuthenticated) fetchUserMeta();
-  })
+    if (isAuthenticated) {
+      fetchUserMeta();
+    } else setMetaLoading(false);
+  },[location.pathname])
 
-  if (loading) {
+  if (loading || metaLoading) {
     return <div>Loading...</div>
   }
   if (!isAuthenticated) {
     return <Navigate to="/login" replace/>
   }
-  if (!onboarding) {
-    // return <Navigate to="/onboarding" replace/>
+  if (!onboarding && location.pathname !== "/onboarding") {
+    return <Navigate to="/onboarding" replace/>
   }
-  return <Outlet/>
+  return <Outlet context={{setOnboarding}}/>
 }
 
 
