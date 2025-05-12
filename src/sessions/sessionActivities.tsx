@@ -10,24 +10,24 @@ function SessionActivity() {
 
   const post = filteredPosts.find((p) => p.slug === params.activityid);
   const maxPosts = filteredPosts.length;
+  const currentIndex = filteredPosts.indexOf(post);
 
   function getNextSlug() {
-    if (!post) return "";
-    const next = Number(post.slug.slice(-1)) + 1;
-    if (next > maxPosts) return "";
-    return post.slug.slice(0, post.slug.length - 1) + next;
+    if (currentIndex<maxPosts-1) {
+      const next = filteredPosts[currentIndex+1];
+      return next.slug;
+    } else return null;
   }
 
   const nextSlug = getNextSlug();
   const isActivity = nextSlug.includes("activity");
 
-  if (!post) return <p>Post not found</p>;
-console.log('hi');
+  console.log('hi');
   return (
     <div>
       <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-      <p>{post.slug.slice(-1)}/{maxPosts}</p>
-      {nextSlug && (
+      <p>{currentIndex+1}/{maxPosts}</p>
+        {nextSlug && (
         <Link to={`/sessions/${params.sessionid}/${isActivity ? "activity" : "chapter"}/${nextSlug}`}>
           Next
         </Link>
