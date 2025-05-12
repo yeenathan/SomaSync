@@ -1,7 +1,8 @@
 import { Outlet, Link, useParams } from "react-router"; //children
 import NavigationRail from "@/components/ui/navigationRail";
 import SectionHead from "@/components/sectionHead";
-import { getPosts, getCategories, getCategoryNameFromID } from "@/utils/WP";
+import { getPosts, getCategories, getCategoryNameFromID, getUserMeta } from "@/utils/WP";
+import { useEffect, useState } from "react";
 
 const posts = await getPosts();
 const categories = await getCategories();
@@ -9,10 +10,29 @@ const categories = await getCategories();
 function SessionLayout() {
   const params = useParams();
   const sessionid = params.sessionid;
+  const [userProgress, setProgress] = useState(null);
 
   const header = sessionid?
     getCategoryNameFromID(posts.find((post:any) => post.slug.slice(0,8) === sessionid).categories[0], categories)
     : "Sessions";
+
+  useEffect(() => {
+    async function fetchProgress() {
+      try {
+        const userMeta = await getUserMeta();
+        const progress = userMeta.meta.progress[0];
+        setProgress(progress);
+      } catch (error) {
+        console.error("Failed to fetch user progress:", error);
+        setProgress("session1");
+      }
+    }
+    fetchProgress();
+  }, []);
+
+  if (!userProgress) {
+    return <p>Loading...</p>
+  }
 
   return(
     <div className="flex flex-row min-h-screen">
@@ -23,7 +43,7 @@ function SessionLayout() {
         </header>
         <div className="container flex flex-col mx-auto gap-8">
           <SectionHead header={header}/>
-          <Outlet context={{posts, categories}}/>
+          <Outlet context={{posts, categories, userProgress, setProgress}}/>
         </div>
       </div>
     </div>

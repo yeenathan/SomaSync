@@ -3,7 +3,7 @@ import { Link, useOutletContext, useParams, useNavigate } from "react-router";
 
 function SessionContent() {
   const params = useParams();
-  const { posts, categories }: { posts: Array<any>, categories: Array<any> } = useOutletContext();
+  const { posts, setProgress }: { posts: Array<any>, setProgress:() => void } = useOutletContext();
 
   const filteredPosts = posts.filter((post) =>
     post.slug.startsWith(params.sessionid)
@@ -33,6 +33,7 @@ function SessionContent() {
     e.preventDefault();
     const nextSessionID = sessionid.slice(0,7) + (Number(sessionid.slice(7, 8))+1);
     await updateUserMeta("progress", nextSessionID);
+    setProgress(nextSessionID);
     navigate("/sessions");
   }
 
