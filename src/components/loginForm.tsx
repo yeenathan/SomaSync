@@ -36,14 +36,17 @@ function LoginForm() {
   }
   return(
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col w-32">
-        <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="username" required />
-        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="password" required />
-        <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="email" />
-        <button type="submit">Submit</button>
+      <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
+        <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required 
+          className="bg-gray-100 p-4 rounded-xl"
+        />
+        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required
+          className="bg-gray-100 p-4 rounded-xl"
+        />
+        <button type="submit" className="p-4 rounded-xl hover:bg-[var(--accent)] border border-gray-200" style={{cursor: "pointer"}}>Login</button>
       </form>
       {
-        failedLogin && <p>Failed to log in</p>
+        failedLogin && <p className="text-red-500">Failed to log in</p>
       }
     </>
   )

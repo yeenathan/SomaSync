@@ -36,7 +36,7 @@ function PrivateRouteLayout() {
   if (!isAuthenticated) {
     return <Navigate to="/login" replace/>
   }
-  if (!onboarding && location.pathname !== "/onboarding") {
+  if (!onboarding && location.pathname !== "/onboarding" && isAuthenticated) {
     return <Navigate to="/onboarding" replace/>
   }
   return(
