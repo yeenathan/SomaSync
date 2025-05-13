@@ -15,7 +15,8 @@ const NavigationRail = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="hidden md:block w-20 min-h-full border-r">
+    <div className="navigationRail hidden md:block w-20 min-h-full border-r "
+>
       <div className="w-20 flex flex-col items-center py-11 ">
         <Link to="/" className="p-2 rounded hover:bg-gray-100" aria-label="Menu">
           <MenuIcon className="w-6 h-6 text-gray-700" />
