@@ -4,7 +4,7 @@ import RegistrationForm from "./components/registrationForm";
 
 function LoginPage() {
   return(
-    <div>
+    <div className="flex flex-col">
       <LoginForm/>
       <p>Don't have an account? <Link to={"/register"}>Register</Link></p>
     </div>

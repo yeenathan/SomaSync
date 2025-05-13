@@ -2,6 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router";
 import { useAuth } from "./authContext";
 import { getUserMeta } from "./WP";
 import { useEffect, useState } from "react";
+import NavigationRail from "@/components/ui/navigationRail";
 
 
 function PrivateRouteLayout() {
@@ -38,7 +39,12 @@ function PrivateRouteLayout() {
   if (!onboarding && location.pathname !== "/onboarding") {
     return <Navigate to="/onboarding" replace/>
   }
-  return <Outlet context={{setOnboarding}}/>
+  return(
+    <div className="flex h-screen">
+      <NavigationRail/>
+      <Outlet context={{setOnboarding}}/>
+    </div>
+  )
 }
 
 

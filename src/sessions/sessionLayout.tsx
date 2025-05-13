@@ -35,16 +35,13 @@ function SessionLayout() {
   }
 
   return(
-    <div className="flex flex-row min-h-screen">
-      <NavigationRail/>
-      <div className="p-8 min-w-full">
-        <header className="pb-4">
-          <Link to="/sessions" className="text-3xl"><h2>Sessions</h2></Link>
-        </header>
-        <div className="container flex flex-col mx-auto gap-8">
-          <SectionHead header={header}/>
-          <Outlet context={{posts, categories, userProgress, setProgress}}/>
-        </div>
+    <div className="p-8 min-w-full">
+      <header className="pb-4">
+        <Link to="/sessions" className="text-3xl"><h2>Sessions</h2></Link>
+      </header>
+      <div className="container flex flex-col mx-auto gap-8">
+        <SectionHead header={header}/>
+        <Outlet context={{posts, categories, userProgress, setProgress}}/>
       </div>
     </div>
   )

@@ -1,6 +1,5 @@
 "use client";
 
-import NavigationRail from "./components/ui/navigationRail";
 import Welcome from "./components/ui/welcome";
 import MenuButtons from "./components/ui/menuButtons";
 import MobileMenu from "./components/ui/mobileMenu";
@@ -16,10 +15,7 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen">
-      {/* Side Menu */}
-      <NavigationRail />
-
+    <div className="w-screen">
       {/* Main Section */}
       <div className=" flex-1 flex flex-col gap-4">
         <div className="flex justify-between items-center pt-8 pl-5">
