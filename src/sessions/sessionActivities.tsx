@@ -10,6 +10,7 @@ function SessionActivity() {
     post.slug.startsWith(params.sessionid)
   );
   const maxPosts = filteredPosts.length;
+  const currentIndex = filteredPosts.indexOf(post);
 
 
   const [question, setQuestion] = useState("");
@@ -47,14 +48,15 @@ const handleSelect = (choice: string) => {
 };
 
   function getNextSlug() {
-    if (!post) return "";
-    const next = Number(post.slug.slice(-1)) + 1;
-    if (next > maxPosts) return "";
-    return post.slug.slice(0, post.slug.length - 1) + next;
+    if (currentIndex<maxPosts-1) {
+      const next = filteredPosts[currentIndex+1];
+      return next.slug;
+    } else return null;
   }
 
   const nextSlug = getNextSlug();
   const isActivity = nextSlug.includes("activity");
+
 
   if (!post) return <p>Post not found</p>;
 

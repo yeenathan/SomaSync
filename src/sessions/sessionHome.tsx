@@ -1,9 +1,18 @@
-import { Link, useOutletContext, useParams, Outlet } from "react-router";
+import { Link, useOutletContext, useParams, Outlet, useNavigate } from "react-router";
 import Category from "@/components/category";
+import { useEffect } from "react";
 
 function SessionHome() {
+  const navigate = useNavigate();
   const params = useParams();
-  const { posts, categories }: { posts: Array<any>, categories: Array<any> } = useOutletContext();
+  const { posts, userProgress }: { posts: Array<any>, userProgress:string } = useOutletContext();
+  
+  useEffect(() => {
+    if (userProgress<params.sessionid) {
+      navigate("/sessions");
+    }
+  }, []); 
+ 
   const currentPosts = posts.filter((post) => {
     return post.slug.slice(0, 8) === params.sessionid;
   })
