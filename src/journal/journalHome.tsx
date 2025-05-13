@@ -6,7 +6,7 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 
 function JournalHome() {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-full">
       {/* Main Section */}
       <div className="flex-1 flex flex-col gap-4 ">
         {/* heading ?*/}
