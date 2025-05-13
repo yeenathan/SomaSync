@@ -36,16 +36,15 @@ function SessionActivity() {
     }
   }, [post]);
 
-function handleSelect(choice: string) {
+const handleSelect = (choice: string) => {
   setSelected(choice);
-  const selectedLetter = choice.split(".")[0].trim(); 
+  const selectedLetter = choice.trim().charAt(0); 
   if (selectedLetter === answer) {
     setFeedback("Correct!");
   } else {
-    setFeedback("Try Again.");
+    setFeedback("Try again.");
   }
-}
-
+};
 
   function getNextSlug() {
     if (!post) return "";
