@@ -3,41 +3,21 @@
 import Welcome from "./components/ui/welcome";
 import MenuButtons from "./components/ui/menuButtons";
 import MobileMenu from "./components/ui/mobileMenu";
-import { useAuth } from "./utils/authContext";
-import { useNavigate } from "react-router";
 
 function App() {
-  const {setUnauthorized} = useAuth();
-  const navigate = useNavigate();
-  function handleClick() {
-    setUnauthorized();
-    navigate("/");
-  }
 
   return (
-    <div className="w-screen">
-      {/* Main Section */}
-      <div className=" flex-1 flex flex-col gap-4">
-        <div className="flex justify-between items-center pt-8 pl-5">
-          <MobileMenu />
-          {/**Desktop */}
-          <h1 className="text-xl w-full pl-2  md:mb-24 mb-0">SomaSync Home</h1>
-          {/** Mobile */}
-        </div>
+    <div className="flex flex-col gap-4 h-full w-full p-8 md:justify-between">
+      <div className="flex justify-between items-center">
+        <MobileMenu />
+        <h1 className="text-xl w-full">SomaSync Home</h1>
+      </div>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col justify-between m-5 lg:m-0">
-          <div className="relative flex-1 flex flex-col   ">
-            <button onClick={handleClick}>log out</button>
-            <div className="mb-3 mt-3 md:mb-0 ">
-              <Welcome />
-            </div>
-
-            {/* MenuButtons */}
-            <div className="w-full md:max-w-[80%] mx-auto md:mx-0 mt-6 md:mt-auto">
-              <MenuButtons />
-            </div>
-          </div>
+      {/* Main Content */}
+      <div className="flex flex-col justify-between m-5 lg:m-0">
+        <div className="flex-1 flex flex-col gap-4">
+          <Welcome />
+          <MenuButtons />
         </div>
       </div>
     </div>
