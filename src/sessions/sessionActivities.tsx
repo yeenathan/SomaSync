@@ -18,6 +18,7 @@ function SessionActivity() {
   const [answer, setAnswer] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
   const [feedback, setFeedback] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
 
   useEffect(() => {
     if (!post) return;
@@ -34,6 +35,9 @@ function SessionActivity() {
       setQuestion(q);
       setChoices(c);
       setAnswer(a);
+      setSelected(null);
+      setFeedback("");
+      setIsCorrect(false);
     }
   }, [post]);
 
@@ -42,6 +46,7 @@ const handleSelect = (choice: string) => {
   const selectedLetter = choice.trim().charAt(0); 
   if (selectedLetter === answer) {
     setFeedback("Correct!");
+    setIsCorrect(true);
   } else {
     setFeedback("Try again.");
   }
@@ -62,25 +67,57 @@ const handleSelect = (choice: string) => {
 
 
   return (
-    <div>
-      <h2>{question}</h2>
-      <ul>
-        {choices.map((choice, i) => (
-          <li key={i}>
-            <button onClick={() => handleSelect(choice)}>{choice}</button>
-          </li>
-        ))}
+<div className="flex flex-col items-center">
+  <div className="w-[609px] flex flex-col flex-grow">
+    <div className="h-[198px] bg-[#64B4CB] rounded-2xl mb-8"></div>
+
+    <hr className="border-2 w-full mb-8 bg-black" />
+
+    <div className="text-center">
+      <h1 className="font-bold text-4xl mb-8">Question 1</h1>
+      <p className="mb-8">{question}</p>
+      <ul className="flex flex-col items-center">
+        {choices.map((choice, i) => {
+          const isSelected = selected === choice;
+          const isCorrectChoice = choice.trim().charAt(0) === answer;
+          const showGreen = isCorrect && isCorrectChoice;
+          const showRed = isSelected && !isCorrect && !isCorrectChoice;
+
+          return (
+            <li
+              key={i}
+              className={`border-2 rounded-lg p-4 m-2 w-72 text-center transition-colors duration-200
+                ${showGreen ? "bg-green-300" : ""}
+                ${showRed ? "bg-red-300" : ""}
+              `}
+            >
+              <button
+                className="w-full h-full"
+                onClick={() => !isCorrect && handleSelect(choice)}
+              >
+                {choice}
+              </button>
+            </li>
+          );
+        })}
       </ul>
-      {selected && <p>{feedback}</p>}
 
-      <p>{post.slug.slice(-1)}/{maxPosts}</p>
-
-      {nextSlug && (
-        <Link to={`/sessions/${params.sessionid}/${isActivity ? "activity" : "chapter"}/${nextSlug}`}>
-          Next
-        </Link>
-      )}
+      {selected && <p className="mt-4 font-semibold">{feedback}</p>}
     </div>
+  </div>
+
+  {isCorrect && nextSlug && (
+    <div className="w-[609px] flex justify-end mt-auto mb-8">
+      <Link
+        className="border-2 bg-[#3C8F6166] text-black px-4 py-2 rounded-2xl hover:bg-[#3C8F6166]"
+        to={`/sessions/${params.sessionid}/${isActivity ? "activity" : "chapter"}/${nextSlug}`}
+      >
+        Next Question
+      </Link>
+    </div>
+  )}
+</div>
+
   );
 
 }
