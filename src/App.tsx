@@ -2,14 +2,14 @@
 
 import Welcome from "./components/ui/welcome";
 import MenuButtons from "./components/ui/menuButtons";
-import MobileMenu from "./components/ui/mobileMenu";
+import MobileOverlayMenu from "./components/ui/mobileOverlayMenu";
 
 function App() {
 
   return (
-    <div className="flex flex-col gap-4 h-full w-full p-8 md:justify-between">
+    <div className="flex flex-col gap-4 h-full w-full p-2 md:justify-between">
       <div className="flex justify-between items-center">
-        <MobileMenu />
+ 
         <h1 className="text-xl w-full">SomaSync Home</h1>
       </div>
 
