@@ -21,7 +21,7 @@ const items = [
   { label: 'Home', path: '/' },
   { label: 'Sessions', path: '/sessions' },
   { label: 'Progress', path: '/progress' },
-  { label: 'Journal', path: '/journal' },
+  // { label: 'Journal', path: '/journal' },
   { label: 'Settings', path: '/settings' },
 ];
 
