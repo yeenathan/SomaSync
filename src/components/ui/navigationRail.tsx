@@ -27,7 +27,7 @@ const items = [
   { label: 'Home', path: '/' },
   { label: 'Sessions', path: '/sessions' },
   { label: 'Progress', path: '/progress' },
-  { label: 'Journal', path: '/journal' },
+  // { label: 'Journal', path: '/journal' },
   { label: 'Settings', path: '/settings' },
 ];
 
@@ -43,6 +43,7 @@ const NavigationRail = () => {
 
   return (
     <>
+    {/* mobile */}
       <div className="md:hidden py-2 px-4">
         <button onClick={() => setShowOverlay(true)} aria-label="Open Menu">
           <MenuIcon className="w-6 h-6 text-gray-700 menuIcons" />
@@ -52,7 +53,7 @@ const NavigationRail = () => {
       <div className="navigationRail hidden md:flex w-20 md:min-h-full flex-col justify-between py-11 ">
         <div className="w-20 flex flex-col items-center">
            <button onClick={() => setShowOverlay(true)} aria-label="Open Menu">
-          <MenuIcon className="w-6 h-6 text-gray-700 menuIcons" />
+          <MenuIcon className="w-6 h-6 text-gray-700 menuIcons mb-6" />
         </button>
           <div className="mt-4 space-y-6">
             {items.map((item) => (
