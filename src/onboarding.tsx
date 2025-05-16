@@ -29,7 +29,7 @@ function Onboarding() {
         const sorted = data.sort((a, b) => new Date(a.date) - new Date(b.date));
         setPosts(sorted);
       } catch (err) {
-        console.error("Failed to load onboarding posts", err);
+        console.error("Failed to load", err);
       } finally {
         setLoading(false);
       }
@@ -42,8 +42,8 @@ function Onboarding() {
     setCurrentIndex((prev) => Math.min(prev + 1, posts.length - 1));
   }
 
-  if (loading) return <div>Loading onboarding step...</div>;
-  if (posts.length === 0) return <div>No onboarding posts found.</div>;
+  if (loading) return <div>Loading...</div>;
+  if (posts.length === 0) return <div>No posts found.</div>;
 
   const currentPost = posts[currentIndex];
 

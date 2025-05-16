@@ -6,19 +6,26 @@ import { getCategoryNameFromID, getUserMeta } from "@/utils/WP";
 function Sessions() {
   const {posts, categories, userProgress}:{posts:Array<any>, categories:Array<any>, userProgress:string} = useOutletContext();
   const ACTIVITY_CATEGORY_ID = 26;
+  const ONBOARDING_CATEGORY_ID = 13;
   let sessions: Array<any> = [];
 
-  for (let i of posts) {
-    if (i.categories.includes(ACTIVITY_CATEGORY_ID) || i.categories.includes(1)) continue;
-    const sessionSlug = i.slug.slice(0, 8);
+for (let i of posts) {
+  if (
+    i.categories.includes(ACTIVITY_CATEGORY_ID) || 
+    i.categories.includes(ONBOARDING_CATEGORY_ID) ||
+    i.categories.includes(1)
+  ) continue;
 
-    if (sessions.some(session => session.sessionid === sessionSlug)) continue;
+  const sessionSlug = i.slug.slice(0, 8);
 
-    sessions.push({
-      sessionid: sessionSlug,
-      title: getCategoryNameFromID(i.categories[0], categories)
-    });
-  }
+  if (sessions.some(session => session.sessionid === sessionSlug)) continue;
+
+  sessions.push({
+    sessionid: sessionSlug,
+    title: getCategoryNameFromID(i.categories[0], categories)
+  });
+}
+
 
   return(
     <div className="flex flex-col gap-4 min-w-full">

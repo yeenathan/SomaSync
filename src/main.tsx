@@ -36,7 +36,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/register" element={<RegisterPage />} />
           <Route element={<PrivateRouteLayout />}>
             <Route path="/" element={<App />} />
-            <Route path="/onboarding" element={<Onboarding />}/>
+            <Route path="/onboarding:slug" element={<Onboarding />} />
             <Route path="/journal" element={<JournalHome />} />
             <Route path="/journalEntry" element={<JournalEntry />} />
             <Route path="/progress" element={<ProgressHome />} />
