@@ -1,12 +1,12 @@
 const DOMAIN = "35.94.240.193";
 
 async function getPosts() {
-  const content = fetch(`http://${DOMAIN}/wp-json/wp/v2/posts?orderby=slug&order=asc`).then((res) => res.json());
+  const content = fetch(`http://${DOMAIN}/wp-json/wp/v2/posts?orderby=slug&order=asc&per_page=30`).then((res) => res.json());
   return content;
 }
 
 async function getCategories() {
-  const content = fetch(`http://${DOMAIN}/wp-json/wp/v2/categories?orderby=slug&order=asc&exclude=1`).then((res) => res.json());
+  const content = fetch(`http://${DOMAIN}/wp-json/wp/v2/categories?orderby=slug&order=asc&exclude=1&per_page=30`).then((res) => res.json());
   return content;
 }
 

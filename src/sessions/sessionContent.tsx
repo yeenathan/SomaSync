@@ -3,7 +3,7 @@ import { Link, useOutletContext, useParams, useNavigate } from "react-router";
 
 function SessionContent() {
   const params = useParams();
-  const { posts, setProgress }: { posts: Array<any>, setProgress:() => void } = useOutletContext();
+  const { posts, userProgress, setProgress }: { posts: Array<any>, userProgress:string, setProgress:() => void } = useOutletContext();
 
   const filteredPosts = posts.filter((post) =>
     post.slug.startsWith(params.sessionid)
@@ -26,8 +26,10 @@ function SessionContent() {
   async function handleclick(e, sessionid:string|undefined) {
     e.preventDefault();
     const nextSessionID = sessionid.slice(0,7) + (Number(sessionid.slice(7, 8))+1);
-    await updateUserMeta("progress", nextSessionID);
-    setProgress(nextSessionID);
+    if (userProgress<nextSessionID) {
+      await updateUserMeta("progress", nextSessionID);
+      setProgress(nextSessionID);
+    }
     navigate("/sessions");
   }
 

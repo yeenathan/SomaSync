@@ -5,26 +5,25 @@ import { getCategoryNameFromID, getUserMeta } from "@/utils/WP";
 
 function Sessions() {
   const {posts, categories, userProgress}:{posts:Array<any>, categories:Array<any>, userProgress:string} = useOutletContext();
-  const ACTIVITY_CATEGORY_ID = 26;
   const ONBOARDING_CATEGORY_ID = 13;
   let sessions: Array<any> = [];
 
-for (let i of posts) {
-  if (
-    i.categories.includes(ACTIVITY_CATEGORY_ID) || 
-    i.categories.includes(ONBOARDING_CATEGORY_ID) ||
-    i.categories.includes(1)
-  ) continue;
+  console.log(posts);
+  for (let i of posts) {
+    if (
+      i.categories.includes(ONBOARDING_CATEGORY_ID) ||
+      i.categories.includes(1)
+    ) continue;
 
-  const sessionSlug = i.slug.slice(0, 8);
+    const sessionSlug = i.slug.slice(0, 8);
 
-  if (sessions.some(session => session.sessionid === sessionSlug)) continue;
+    if (sessions.some(session => session.sessionid === sessionSlug)) continue;
 
-  sessions.push({
-    sessionid: sessionSlug,
-    title: getCategoryNameFromID(i.categories[0], categories)
-  });
-}
+    sessions.push({
+      sessionid: sessionSlug,
+      title: getCategoryNameFromID(i.categories[0], categories)
+    });
+  }
 
 
   return(
@@ -33,13 +32,12 @@ for (let i of posts) {
         sessions.map((session, key) => {
           const isDisabled = userProgress<session.sessionid;
           return(
+            !isDisabled?
             <Link key={key} to={`/sessions/${session.sessionid}`}>
               <Category title={session.title} subtitle={null}/>
-              {
-                isDisabled && <p>disabled</p>
-              }
             </Link>
-            
+            :
+            <Category title={session.title} subtitle={"disabled"}/>
           )
         })
       }
