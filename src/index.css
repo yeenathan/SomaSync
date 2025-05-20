@@ -29,7 +29,6 @@ body {
 html.dark body {
   background-color: #212121;
   color: white;
-
 }
 
 .navigationRail {
@@ -43,5 +42,11 @@ color: white;
 }
 
 html.dark .menuIcons {
+  color: white;
+}
+
+html.dark .button {
+  background-color: #53C285;
+  border-color: white;
   color: white;
 }

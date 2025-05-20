@@ -48,16 +48,67 @@ function Onboarding() {
   const currentPost = posts[currentIndex];
 
   return (
-    <div className="onboarding-step">
-      <h1 dangerouslySetInnerHTML={{ __html: currentPost.title.rendered }} />
-      <div dangerouslySetInnerHTML={{ __html: currentPost.content.rendered }} />
+    <>
+      <style>{`
+    .wp-block-list {
+      list-style-type: decimal;
+      margin-left: 1.5rem;
+      padding-left: 1rem;
+      margin-top: 2rem;
+      
+    }
 
-      {currentIndex < posts.length - 1 ? (
-        <button onClick={handleNext}>Next</button>
-      ) : (
-        <button onClick={() => window.location.href = "/"}>Finish Onboarding</button>
-      )}
-    </div>
+    .wp-block-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    .wp-block-paragraph {
+      margin-top: 4rem;
+      margin-bottom: 1rem;
+    }
+    
+    .subtitle {
+      font-size: small;
+      margin-bottom: 4rem;
+    }
+
+
+  `}</style>
+
+      <div className="px-4 pt-8 ">
+        <div className="w-full max-w-prose">
+          <div className="h-[198px] bg-[#64B4CB] rounded-2xl mb-8 md:w-[610px] w-full"></div>
+
+          <h1
+            className="text-3xl font-bold mb-4"
+            dangerouslySetInnerHTML={{ __html: currentPost.title.rendered }}
+          />
+          <div
+            className="wp-content"
+            dangerouslySetInnerHTML={{ __html: currentPost.content.rendered }}
+          />
+
+        </div>
+        <div className="flex justify-end mt-8">
+          {currentIndex < posts.length - 1 ? (
+            <button
+              className="button border-1 bg-[#53C285] text-black px-4 py-2 rounded-2xl hover:bg-[#3C8F6166]"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              className="border-2 bg-[#3C8F61] text-black px-4 py-2 rounded-2xl hover:bg-[#3C8F6166]"
+              onClick={() => window.location.href = "/"}
+            >
+              Finish Onboarding
+            </button>
+          )}
+        </div>
+      </div>
+
+    </>
   );
 }
 
