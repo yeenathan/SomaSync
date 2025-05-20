@@ -100,7 +100,7 @@ function Onboarding() {
           ) : (
             <button
               className="border-2 bg-[#3C8F61] text-black px-4 py-2 rounded-2xl hover:bg-[#3C8F6166]"
-              onClick={() => window.location.href = "/"}
+              onClick={handleclick}
             >
               Finish Onboarding
             </button>

@@ -35,7 +35,7 @@ function SessionLayout() {
   }
 
   return(
-    <div className="p-8 min-w-full">
+    <div className="p-8 w-full">
       <header className="pb-4 flex flex-row gap-4 items-center">
         <BackButton/>
         <Link to="/sessions" className="text-3xl"><h2>Sessions</h2></Link>
