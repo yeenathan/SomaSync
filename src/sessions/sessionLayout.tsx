@@ -35,12 +35,12 @@ function SessionLayout() {
   }
 
   return(
-    <div className="p-8 w-full">
-      <header className="pb-4 flex flex-row gap-4 items-center">
+    <div className="flex flex-col p-4 md:p-8 w-full h-full">
+      <header className="mb-4 flex flex-row gap-4 items-center">
         <BackButton/>
         <Link to="/sessions" className="text-3xl"><h2>Sessions</h2></Link>
       </header>
-      <div className="container flex flex-col mx-auto gap-8">
+      <div className="flex flex-col mx-auto min-w-full h-full">
         <SectionHead header={header}/>
         <Outlet context={{posts, categories, userProgress, setProgress}}/>
       </div>

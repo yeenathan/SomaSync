@@ -34,15 +34,22 @@ function SessionContent() {
   }
 
   return (
-    <div>
-      <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-    
-      <p>{currentIndex+1}/{maxPosts}</p>
-      {nextSlug ? 
-      <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
-      :
-      <Link to={`/sessions/`} onClick={(e) => handleclick(e, params.sessionid)}>Complete</Link>
-    }
+    <div className="container max-w-6xl flex flex-col justify-between h-full container mx-auto">
+      <div>
+        <h1 className="font-semibold text-3xl mb-2 md:mb-4">{post.title.rendered}</h1>
+        <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+      </div>
+      <div className="flex flex-row w-full p-4 justify-between">
+        <button onClick={() => navigate(-1)} style={{cursor: "pointer"}}>
+          Previous
+        </button>
+        <p>{currentIndex+1}/{maxPosts}</p>
+        {nextSlug ? 
+          <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
+          :
+          <Link to={`/sessions/`} onClick={(e) => handleclick(e, params.sessionid)}>Complete</Link>
+        }
+      </div>
     </div>
   );
 }
