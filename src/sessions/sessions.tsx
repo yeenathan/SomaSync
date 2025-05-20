@@ -8,7 +8,6 @@ function Sessions() {
   const ONBOARDING_CATEGORY_ID = 13;
   let sessions: Array<any> = [];
 
-  console.log(posts);
   for (let i of posts) {
     if (
       i.categories.includes(ONBOARDING_CATEGORY_ID) ||
