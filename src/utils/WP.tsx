@@ -1,4 +1,4 @@
-const DOMAIN = "35.94.240.193";
+const DOMAIN = "44.227.203.12";
 
 async function getPosts() {
   const content = fetch(`http://${DOMAIN}/wp-json/wp/v2/posts?orderby=slug&order=asc&per_page=30`).then((res) => res.json());
