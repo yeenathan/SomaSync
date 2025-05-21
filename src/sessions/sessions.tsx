@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router";
 import Category from "@/components/category";
 import { Link } from "react-router";
-import { getCategoryNameFromID, getUserMeta } from "@/utils/WP";
+import { getCategoryNameFromID } from "@/utils/WP";
 
 function Sessions() {
   const {posts, categories, userProgress}:{posts:Array<any>, categories:Array<any>, userProgress:string} = useOutletContext();
@@ -24,19 +24,24 @@ function Sessions() {
     });
   }
 
+  function getStatus(sessionid:string) {
+    if (userProgress<sessionid) {
+      return "disabled";
+    }
+    else if (userProgress>sessionid) {
+      return "checked";
+    }
+    else {
+      return "neutral";
+    }
+  }
 
   return(
     <div className="flex flex-col gap-4 min-w-full">
       {
         sessions.map((session, key) => {
-          const isDisabled = userProgress<session.sessionid;
           return(
-            !isDisabled?
-            <Link key={key} to={`/sessions/${session.sessionid}`}>
-              <Category title={session.title} subtitle={null}/>
-            </Link>
-            :
-            <Category title={session.title} subtitle={"disabled"}/>
+            <Category title={session.title} subtitle={null} status={getStatus(session.sessionid)} route={`/sessions/${session.sessionid}`} key={key}/>
           )
         })
       }

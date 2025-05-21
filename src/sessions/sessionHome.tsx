@@ -12,7 +12,7 @@ function SessionHome() {
       navigate("/sessions");
     }
   }, []); 
- 
+
   const currentPosts = posts.filter((post) => {
     return post.slug.slice(0, 8) === params.sessionid;
   })
@@ -23,9 +23,7 @@ function SessionHome() {
           const isActivity = post.slug.includes("activity");
           const type = isActivity ? "activity" : "chapter";
           return (
-            <Link key={i} to={`/sessions/${params.sessionid}/${type}/${post.slug}`}>
-              <Category title={post.title.rendered} subtitle={post.excerpt.rendered} />
-            </Link>
+            <Category title={post.title.rendered} subtitle={post.excerpt.rendered} route={`/sessions/${params.sessionid}/${type}/${post.slug}`} key={i}/>
           );
         })
       }
