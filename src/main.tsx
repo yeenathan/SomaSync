@@ -5,7 +5,6 @@ if (saved === "dark") {
   document.documentElement.classList.remove("dark");
 }
 
-
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
@@ -16,10 +15,14 @@ import SessionLayout from "@/sessions/sessionLayout.tsx";
 import SessionHome from "@/sessions/sessionHome.tsx";
 import SessionContent from "@/sessions/sessionContent.tsx";
 import SessionActivity from "./sessions/sessionActivities.tsx";
+
 import JournalHome from "@/journal/journalHome.tsx";
 import JournalEntry from "./journal/journalEntry.tsx";
 import ProgressHome from "./progress/progressHome.tsx";
-import Settings from "./settings";
+
+import Settings from "./settings/settings.jsx";
+import EditProfile from "./settings/editProfile.tsx";
+import Accessibility from "./settings/accessibility.tsx";
 
 import { FontSizeProvider } from "./components/fontSizeContext.tsx";
 import { AuthContextProvider } from "./utils/authContext.tsx";
@@ -48,7 +51,10 @@ createRoot(document.getElementById("root")!).render(
               <Route path=":sessionid/activity/" element={<SessionActivity />} />
             </Route>
 
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/settings" element={<Settings />}/>
+            <Route path="/settings/profile" element={<EditProfile />} />
+            <Route path="/settings/accessibility" element={<Accessibility />} />
+          
           </Route>
         </Routes>
       </BrowserRouter>
