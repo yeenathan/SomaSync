@@ -4,19 +4,17 @@ import CompletedModule from "@/components/ui/completedModule";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { CircularProgress } from '@mui/material';
-
+import BackButton from "@/components/ui/backButton";
 function ProgressHome() {
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex flex-col p-4 md:p-8 w-full h-full">
       {/* Main Section */}
       <div className="flex-1 flex flex-col gap-4 ">
         {/* heading */}
-        <div className="flex items-center pt-8 pl-5 ">
-          <Link to={`/`} className="flex place-items-center">
-            <ArrowBackIcon className="" />
-            <h1 className=" pl-2 text-xl">Progress</h1>
-          </Link>
-        </div>
+        <header className="mb-4 flex flex-row gap-4 items-center">
+          <BackButton />
+          <Link to="/sessions" className="text-3xl"><h2>Progress</h2></Link>
+        </header>
 
         {/* Main Content */}
         <div className="flex flex-col justify-between md:mr-12 m-4">
@@ -54,7 +52,7 @@ function ProgressHome() {
             <div className="w-1/2 flex flex-col ml-4">
               <p className="mb-2 text-xl mb-6">Completed Modules</p>
               <div className="flex flex-col">
-              <CompletedModule />
+                <CompletedModule />
               </div>
             </div>
             {/** Almost Done */}
@@ -75,7 +73,7 @@ function ProgressHome() {
           <div className="mt-10 md:hidden">
             <p>Completed Modules</p>
             <div className="flex flex-col ">
-            <CompletedModule />
+              <CompletedModule />
             </div>
           </div>
         </div>

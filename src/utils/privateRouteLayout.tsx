@@ -41,9 +41,13 @@ function PrivateRouteLayout() {
   }
   return(
 <div className="flex flex-col md:flex-row h-screen">
-  <NavigationRail/>
-  <Outlet context={{setOnboarding}}/>
+  <div className="hidden md:block w-20" />
+  <NavigationRail />
+  <div className="flex-1 overflow-auto">
+    <Outlet context={{ setOnboarding }} />
+  </div>
 </div>
+
   )
 }
 

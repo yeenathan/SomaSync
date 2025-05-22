@@ -1,4 +1,4 @@
-import { useFontSize } from "../fontSizeContext";
+import { useFontSize } from "../components/fontSizeContext";
 
 export default function TextSize() {
   const { fontScale, setFontScale } = useFontSize();
