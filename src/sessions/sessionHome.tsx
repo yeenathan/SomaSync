@@ -2,31 +2,37 @@ import { Link, useOutletContext, useParams, Outlet, useNavigate } from "react-ro
 import Category from "@/components/category";
 import { useEffect } from "react";
 
+
 function SessionHome() {
   const navigate = useNavigate();
   const params = useParams();
-  const { posts, userProgress }: { posts: Array<any>, userProgress:string } = useOutletContext();
+  const { posts, userProgress }: { posts: Array<any>, userProgress: string } = useOutletContext();
   
   useEffect(() => {
-    if (userProgress<params.sessionid) {
+    if (userProgress < params.sessionid) {
       navigate("/sessions");
     }
-  }, []); 
+  }, []);
 
-  const currentPosts = posts.filter((post) => {
-    return post.slug.slice(0, 8) === params.sessionid;
-  })
+  const chapterPosts = posts.filter((post) =>
+    post.slug.startsWith(params.sessionid) && !post.slug.includes("activity")
+  );
+
   return (
     <div className="flex flex-col gap-4 min-w-full">
-      {
-        currentPosts.map((post, i) => {
-          const isActivity = post.slug.includes("activity");
-          const type = isActivity ? "activity" : "chapter";
-          return (
-            <Category title={post.title.rendered} subtitle={post.excerpt.rendered} route={`/sessions/${params.sessionid}/${type}/${post.slug}`} key={i}/>
-          );
-        })
-      }
+      {chapterPosts.map((post, i) => (
+        <Category
+          key={i}
+          title={post.title.rendered}
+          route={`/sessions/${params.sessionid}/chapter/${post.slug}`}
+        />
+      ))}
+
+      <Category
+        title="Session Quiz"
+        route={`/sessions/${params.sessionid}/activity`}
+      />
+
       <Outlet />
     </div>
   )

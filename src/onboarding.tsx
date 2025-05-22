@@ -1,4 +1,4 @@
-const DOMAIN = "35.94.240.193";
+const DOMAIN = "44.227.203.12";
 
 import { Link, useOutletContext } from "react-router";
 import { useNavigate } from "react-router";
