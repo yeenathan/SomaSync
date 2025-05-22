@@ -43,18 +43,20 @@ const NavigationRail = () => {
 
   return (
     <>
-    {/* mobile */}
+      {/* mobile */}
       <div className="md:hidden py-2 px-4">
         <button onClick={() => setShowOverlay(true)} aria-label="Open Menu">
           <MenuIcon className="w-6 h-6 text-gray-700 menuIcons" />
         </button>
       </div>
 
-      <div className="navigationRail hidden md:flex w-20 md:min-h-full flex-col justify-between py-11 ">
+      <div className="navigationRail hidden md:flex fixed top-0 left-0 h-screen w-20 flex-col justify-between py-11 bg-white shadow-md z-50">
+
+
         <div className="w-20 flex flex-col items-center">
-           <button onClick={() => setShowOverlay(true)} aria-label="Open Menu">
-          <MenuIcon className="w-6 h-6 text-gray-700 menuIcons mb-6" />
-        </button>
+          <button onClick={() => setShowOverlay(true)} aria-label="Open Menu">
+            <MenuIcon className="w-6 h-6 text-gray-700 menuIcons mb-6" />
+          </button>
           <div className="mt-4 space-y-6">
             {items.map((item) => (
               <button
