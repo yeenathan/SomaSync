@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 function SessionActivity() {
   const { sessionid } = useParams();
-  const { posts }: { posts: Array<any> } = useOutletContext();
+  const { posts }: { posts: any[] } = useOutletContext();
 
-  // Get only activity posts for this session
+
   const activityPosts = posts.filter((post) =>
     post.slug.startsWith(`${sessionid}-activity`)
   );
@@ -13,10 +13,12 @@ function SessionActivity() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const post = activityPosts[currentIndex];
 
+
   const [question, setQuestion] = useState("");
   const [choices, setChoices] = useState<string[]>([]);
-  const [answer, setAnswer] = useState("");
-  const [selected, setSelected] = useState<string | null>(null);
+  const [choiceKeys, setChoiceKeys] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [feedback, setFeedback] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
 
@@ -26,40 +28,63 @@ function SessionActivity() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(post.content.rendered, "text/html");
     const quiz = doc.querySelector("quiz");
+    if (!quiz) return;
 
-    if (quiz) {
-      const q = quiz.querySelector("question")?.textContent || "";
-      const c = Array.from(quiz.querySelectorAll("choice")).map(
-        (choice) => choice.textContent || ""
-      );
-      const a = quiz.querySelector("answer")?.textContent?.trim() || "";
+    const q = quiz.querySelector("question")?.textContent || "";
+    const rawChoices = Array.from(quiz.querySelectorAll("choice")).map(
+      (choice) => choice.textContent || ""
+    );
 
-      setQuestion(q);
-      setChoices(c);
-      setAnswer(a);
-      setSelected(null);
-      setFeedback("");
-      setIsCorrect(false);
-    }
+    const keys = rawChoices.map((choice) => {
+      const match = choice.match(/^([A-Z])\./i);
+      return match ? match[1].toLowerCase() : choice.toLowerCase();
+    });
+
+    const answerText = quiz.querySelector("answer")?.textContent || "";
+    const a = answerText
+      .split(",")
+      .map((ans) => ans.trim().toLowerCase())
+      .filter((ans) => ans.length > 0);
+
+    setQuestion(q);
+    setChoices(rawChoices);
+    setChoiceKeys(keys);
+    setAnswers(a);
+    setSelected([]);
+    setFeedback("");
+    setIsCorrect(false);
   }, [post]);
 
+
   const handleSelect = (choice: string) => {
-    setSelected(choice);
+    const match = choice.match(/^([A-Z])\./i);
+    const key = match ? match[1].toLowerCase() : choice.toLowerCase();
 
-    const cleanedChoice = choice.trim();
-    const cleanedAnswer = answer.trim();
+    let updatedSelected: string[];
 
-    const byLetter = cleanedAnswer.length === 1 && /^[A-Za-z]$/.test(cleanedAnswer);
-
-    const match = byLetter
-      ? cleanedChoice.charAt(0).toLowerCase() === cleanedAnswer.toLowerCase()
-      : cleanedChoice.toLowerCase() === cleanedAnswer.toLowerCase();
-
-    if (match) {
-      setFeedback("Correct!");
-      setIsCorrect(true);
+    if (answers.length === 1) {
+      updatedSelected = [key];
     } else {
-      setFeedback("Try again.");
+      updatedSelected = selected.includes(key)
+        ? selected.filter((s) => s !== key)
+        : [...selected, key];
+    }
+
+    setSelected(updatedSelected);
+
+    const hasAnyCorrect = updatedSelected.some((s) => answers.includes(s));
+    const allCorrect = answers.every((a) => updatedSelected.includes(a));
+    const noExtraSelected = updatedSelected.every((s) => answers.includes(s));
+
+    if (allCorrect && noExtraSelected) {
+      setIsCorrect(true);
+      setFeedback("Correct!");
+    } else if (hasAnyCorrect) {
+      setIsCorrect(false);
+      setFeedback("You got some correct, keep going!");
+    } else {
+      setIsCorrect(false);
+      setFeedback("Try Again.");
     }
   };
 
@@ -83,24 +108,21 @@ function SessionActivity() {
           <p className="mb-8">{question}</p>
           <ul className="flex flex-col items-center">
             {choices.map((choice, i) => {
+              const match = choice.match(/^([A-Z])\./i);
+              const key = match ? match[1].toLowerCase() : choice.toLowerCase();
 
-              const isSelected = selected === choice;
-              const cleanedChoice = choice.trim().toLowerCase();
-              const cleanedAnswer = answer.trim().toLowerCase();
-              const isCorrectChoice =
-                cleanedChoice === cleanedAnswer || cleanedChoice.charAt(0) === cleanedAnswer;
-
-              const showGreen = isCorrect && isCorrectChoice;
-              const showRed = isSelected && !isCorrect && !isCorrectChoice;
-
+              const isSelected = selected.includes(key);
+              const isCorrectAnswer = answers.includes(key);
+              const bgGreen = isSelected && isCorrectAnswer;
+              const bgRed = isSelected && !isCorrectAnswer;
 
               return (
                 <li
                   key={i}
                   className={`border-2 rounded-lg p-4 m-2 w-72 text-center transition-colors duration-200
-                    ${showGreen ? "bg-green-300" : ""}
-                    ${showRed ? "bg-red-300" : ""}
-                  `}
+          ${bgGreen ? "bg-green-300" : ""}
+          ${bgRed ? "bg-red-300" : ""}
+        `}
                 >
                   <button
                     className="w-full h-full"
@@ -113,7 +135,8 @@ function SessionActivity() {
             })}
           </ul>
 
-          {selected && <p className="mt-4 font-semibold">{feedback}</p>}
+
+          {selected.length > 0 && <p className="mt-4 font-semibold">{feedback}</p>}
         </div>
       </div>
 
@@ -138,3 +161,4 @@ function SessionActivity() {
 }
 
 export default SessionActivity;
+
