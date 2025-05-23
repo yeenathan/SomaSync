@@ -11,9 +11,10 @@ function SessionLayout() {
   const params = useParams();
   const sessionid = params.sessionid;
   const [userProgress, setProgress] = useState(null);
- 
-  const header = sessionid?
-    getCategoryNameFromID(posts.find((post:any) => post.slug.slice(0,8) === sessionid).categories[0], categories)
+
+  const header = sessionid ?
+    getCategoryNameFromID(posts.find((post: any) => post.slug.match(new RegExp(`^${sessionid}\\b`)))
+      .categories[0], categories)
     : "Sessions";
 
   useEffect(() => {
@@ -34,15 +35,15 @@ function SessionLayout() {
     return <p>Loading...</p>
   }
 
-  return(
+  return (
     <div className="flex flex-col p-4 md:p-8 w-full h-full">
       <header className="mb-4 flex flex-row gap-4 items-center">
-        <BackButton/>
+        <BackButton />
         <Link to="/sessions" className="text-3xl"><h2>Sessions</h2></Link>
       </header>
       <div className="flex flex-col mx-auto min-w-full h-full">
-        <SectionHead header={header}/>
-        <Outlet context={{posts, categories, userProgress, setProgress}}/>
+        <SectionHead header={header} />
+        <Outlet context={{ posts, categories, userProgress, setProgress }} />
       </div>
     </div>
   )
