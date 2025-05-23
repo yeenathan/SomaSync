@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { getCategoryNameFromID } from "@/utils/WP";
 
 function Sessions() {
-  const {posts, categories, userProgress}:{posts:Array<any>, categories:Array<any>, userProgress:string} = useOutletContext();
+  const { posts, categories, userProgress }: { posts: Array<any>, categories: Array<any>, userProgress: string } = useOutletContext();
   const ONBOARDING_CATEGORY_ID = 13;
   let sessions: Array<any> = [];
 
@@ -14,7 +14,9 @@ function Sessions() {
       i.categories.includes(1)
     ) continue;
 
-    const sessionSlug = i.slug.slice(0, 8);
+    const match = i.slug.match(/^session\d+/);
+    const sessionSlug = match ? match[0] : i.slug;
+
 
     if (sessions.some(session => session.sessionid === sessionSlug)) continue;
 
@@ -23,12 +25,19 @@ function Sessions() {
       title: getCategoryNameFromID(i.categories[0], categories)
     });
   }
+  
+  sessions.sort((a, b) => {
+  const numA = parseInt(a.sessionid.replace("session", ""), 10);
+  const numB = parseInt(b.sessionid.replace("session", ""), 10);
+  return numA - numB;
+});
 
-  function getStatus(sessionid:string) {
-    if (userProgress<sessionid) {
+
+  function getStatus(sessionid: string) {
+    if (userProgress < sessionid) {
       return "disabled";
     }
-    else if (userProgress>sessionid) {
+    else if (userProgress > sessionid) {
       return "checked";
     }
     else {
@@ -36,12 +45,12 @@ function Sessions() {
     }
   }
 
-  return(
+  return (
     <div className="flex flex-col gap-4 min-w-full">
       {
         sessions.map((session, key) => {
-          return(
-            <Category title={session.title} subtitle={null} status={getStatus(session.sessionid)} route={`/sessions/${session.sessionid}`} key={key}/>
+          return (
+            <Category title={session.title} subtitle={null} status={getStatus(session.sessionid)} route={`/sessions/${session.sessionid}`} key={key} />
           )
         })
       }

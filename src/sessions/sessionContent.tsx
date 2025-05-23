@@ -23,15 +23,22 @@ function SessionContent() {
   const nextSlug = getNextChapterSlug();
 
   const navigate = useNavigate();
-  async function handleclick(e, sessionid:string|undefined) {
-    e.preventDefault();
-    const nextSessionID = sessionid.slice(0,7) + (Number(sessionid.slice(7, 8))+1);
-    if (userProgress<nextSessionID) {
-      await updateUserMeta("progress", nextSessionID);
-      setProgress(nextSessionID);
-    }
-    navigate("/sessions");
+
+ async function handleclick(e, sessionid: string | undefined) {
+  e.preventDefault();
+  if (!sessionid) return;
+
+  const prefix = sessionid.replace(/\d+$/, "");         // "session"
+  const number = parseInt(sessionid.match(/\d+$/)[0]);  // 11
+  const nextSessionID = `${prefix}${number + 1}`;       // "session12"
+
+  if (userProgress < nextSessionID) {
+    await updateUserMeta("progress", nextSessionID);
+    setProgress(nextSessionID);
   }
+  navigate("/sessions");
+}
+
 
   return (
     <div className="container max-w-6xl flex flex-col justify-between h-full container mx-auto">
