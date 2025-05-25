@@ -51,7 +51,13 @@ html.dark .button {
   color: white;
 }
 
-/* wp embed styling */
+
+html.dark .settingsButton {
+  background-color: #4B5563;
+  border-color: white;
+  color: white;
+}
+
 .wp-block-embed iframe {
   height: auto;
   width: 100%;
