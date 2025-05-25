@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export default function TextSize() {
   const { fontScale, setFontScale } = useFontSize();
 
-  // Map scale to range value
+
   const scaleMap = { small: 0, medium: 1, large: 2 };
   const reverseMap = ["small", "medium", "large"];
 
