@@ -20,7 +20,7 @@ const iconMap: Record<string, React.ReactNode> = {
 const items = [
   { label: 'Home', path: '/' },
   { label: 'Sessions', path: '/sessions' },
-  { label: 'Progress', path: '/progress' },
+  // { label: 'Progress', path: '/progress' },
   // { label: 'Journal', path: '/journal' },
   { label: 'Settings', path: '/settings' },
 ];
@@ -40,19 +40,19 @@ const MobileOverlayMenu = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-white bg-opacity-95 z-50 flex flex-col p-6 md:hidden">
+    <div className="navigationRail fixed inset-0  z-50 flex flex-col p-6 md:hidden">
       <div className="flex justify-end">
         <button onClick={onClose} aria-label="Close menu">
-          <CloseIcon className="w-8 h-8 text-gray-700" />
+          <CloseIcon className="w-8 h-8 " />
         </button>
       </div>
 
-      <div className="flex-1 mt-10 space-y-6 text-lg">
+      <div className="flex-1 mt-10 space-y-6 text-lg ">
         {items.map((item) => (
           <button
             key={item.label}
             onClick={() => handleNavigate(item.path)}
-            className="flex items-center text-gray-700 hover:text-blue-600 transition"
+            className="flex items-center gap-2"
           >
             {iconMap[item.label]}
             {item.label}
@@ -61,9 +61,9 @@ const MobileOverlayMenu = ({ onClose }: { onClose: () => void }) => {
 
         <button
           onClick={handleLogout}
-          className="flex items-center text-gray-700 hover:text-red-500 transition"
+          className="flex items-center gap-2"
         >
-          <LogoutIcon className="w-6 h-6 mr-3" />
+          <LogoutIcon className="w-6 h-6 " />
           Log out
         </button>
       </div>
