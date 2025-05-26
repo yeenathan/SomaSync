@@ -2,7 +2,7 @@ import { Checkbox } from '@mui/material';
 import { RadioButtonUnchecked, CheckCircleOutline } from '@mui/icons-material';
 import { Link } from 'react-router';
 
-export default function Category({title, subtitle=null, status="neutral", route}:{title:string, subtitle:string|null, status:string, route:string}) {
+export default function Category({title, subtitle=null, status="neutral", route, isChapter=false}:{title:string, subtitle:string|null, status:string, route:string, isChapter:boolean}) {
   let disabled = false;
   let checked = false;
   if (status === "disabled") disabled = true;
@@ -12,7 +12,9 @@ export default function Category({title, subtitle=null, status="neutral", route}
     !disabled?
     <div className="border-b border-gray-600 pb-12">
       <Link to={route} className="flex flex-row items-start gap-2">
-        <Checkbox icon={<RadioButtonUnchecked/>} checkedIcon={<CheckCircleOutline/>} disabled={disabled} checked={checked} style={{padding:0}}/>
+        {!isChapter &&
+          <Checkbox icon={<RadioButtonUnchecked/>} checkedIcon={<CheckCircleOutline/>} disabled={disabled} checked={checked} style={{padding:0}}/>
+        }
         <div>
           <h3 className="text-xl" style={disabled?{color: ""}:{}}>{title}</h3>
           <p>{subtitle}</p>
@@ -22,7 +24,9 @@ export default function Category({title, subtitle=null, status="neutral", route}
     :
     <div className="border-b border-gray-400 pb-12">
       <div className="flex flex-row items-start gap-2">
-        <Checkbox icon={<RadioButtonUnchecked/>} checkedIcon={<CheckCircleOutline/>} disabled={disabled} checked={checked} style={{padding:0}}/>
+        {!isChapter &&
+          <Checkbox icon={<RadioButtonUnchecked/>} checkedIcon={<CheckCircleOutline/>} disabled={disabled} checked={checked} style={{padding:0}}/>
+        }
         <div>
           <h3 className="text-xl text-gray-400" style={disabled?{color: ""}:{}}>{title}</h3>
           <p>{subtitle}</p>

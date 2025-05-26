@@ -34,10 +34,13 @@ function Sessions() {
 
 
   function getStatus(sessionid: string) {
-    if (userProgress < sessionid) {
+    if (!sessionid) return "neutral";
+    const id = parseInt(sessionid.match(/\d+$/)[0]);
+    const userid = parseInt(userProgress.match(/\d+$/)[0]);
+    if (userid < id) {
       return "disabled";
     }
-    else if (userProgress > sessionid) {
+    else if (userid > id) {
       return "checked";
     }
     else {

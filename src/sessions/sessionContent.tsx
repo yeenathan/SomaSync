@@ -6,8 +6,12 @@ function SessionContent() {
   const { posts, userProgress, setProgress }: { posts: Array<any>, userProgress:string, setProgress:() => void } = useOutletContext();
 
   const filteredPosts = posts.filter((post) =>
-    post.slug.startsWith(params.sessionid)
+    post.slug.split("-")[0] == params.sessionid && !post.slug.includes("activity")
   );
+
+  const hasQuiz:boolean = posts.filter((post) =>
+    post.slug.split("-")[0] == params.sessionid && post.slug.includes("activity")
+  ).length>0;
 
   const post = filteredPosts.find((p) => p.slug === params.chapterid);
   const maxPosts = filteredPosts.length;
@@ -24,21 +28,19 @@ function SessionContent() {
 
   const navigate = useNavigate();
 
- async function handleclick(e, sessionid: string | undefined) {
-  e.preventDefault();
-  if (!sessionid) return;
+  async function handleclick(sessionid: string | undefined) {
+    if (!sessionid) return;
 
-  const prefix = sessionid.replace(/\d+$/, "");         // "session"
-  const number = parseInt(sessionid.match(/\d+$/)[0]);  // 11
-  const nextSessionID = `${prefix}${number + 1}`;       // "session12"
+    const prefix = sessionid.replace(/\d+$/, "");         // "session"
+    const number = parseInt(sessionid.match(/\d+$/)[0]);  // 11
+    const nextSessionID = `${prefix}${number + 1}`;       // "session12"
 
-  if (userProgress < nextSessionID) {
-    await updateUserMeta("progress", nextSessionID);
-    setProgress(nextSessionID);
+    if (userProgress < nextSessionID) {
+      await updateUserMeta("progress", nextSessionID);
+      setProgress(nextSessionID);
+    }
+    navigate("/sessions");
   }
-  navigate("/sessions");
-}
-
 
   return (
     <div className="container max-w-6xl flex flex-col justify-between h-full container mx-auto">
@@ -54,7 +56,10 @@ function SessionContent() {
         {nextSlug ? 
           <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
           :
-          <Link to={`/sessions/`} onClick={(e) => handleclick(e, params.sessionid)}>Complete</Link>
+          !hasQuiz?
+          <Link to={`/sessions/`} onClick={() => handleclick(params.sessionid)}>Complete</Link>
+          :
+          <Link to={`/sessions/${params.sessionid}`}>Return</Link>
         }
       </div>
     </div>

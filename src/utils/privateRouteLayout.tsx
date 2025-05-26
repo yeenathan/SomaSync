@@ -6,7 +6,7 @@ import NavigationRail from "@/components/ui/navigationRail";
 
 
 function PrivateRouteLayout() {
-  const {loading, isAuthenticated} = useAuth();
+  const {loading, isAuthenticated, setUnauthorized} = useAuth();
   const [onboarding, setOnboarding] = useState(null);
   const [metaLoading, setMetaLoading] = useState(true);
   const location = useLocation();
@@ -20,6 +20,7 @@ function PrivateRouteLayout() {
       }
       catch (e) {
         setOnboarding(false);
+        setUnauthorized();
       }
       finally {
         setMetaLoading(false);
@@ -40,14 +41,10 @@ function PrivateRouteLayout() {
     return <Navigate to="/onboarding" replace/>
   }
   return(
-<div className="flex flex-col md:flex-row h-screen">
-  <div className="hidden md:block w-20" />
-  <NavigationRail />
-  <div className="flex-1 overflow-auto">
-    <Outlet context={{ setOnboarding }} />
-  </div>
+<div className="flex flex-col md:flex-row h-screen pl-20">
+  <NavigationRail/>
+  <Outlet context={{setOnboarding}}/>
 </div>
-
   )
 }
 

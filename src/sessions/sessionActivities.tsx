@@ -1,10 +1,12 @@
-import { useParams, useOutletContext } from "react-router";
+import { useParams, useOutletContext, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { updateUserMeta } from "@/utils/WP";
 
 function SessionActivity() {
   const { sessionid } = useParams();
-  const { posts }: { posts: any[] } = useOutletContext();
+  const { posts, setProgress, userProgress }: { posts: any[], setProgress: () => void, userProgress:string } = useOutletContext();
 
+  const navigate = useNavigate();
 
   const activityPosts = posts.filter((post) =>
     post.slug.startsWith(`${sessionid}-activity`)
@@ -96,6 +98,20 @@ function SessionActivity() {
 
   if (!post) return <p>Loading...</p>;
 
+  const handleComplete = async (sessionid: string|undefined) => {
+    if (!sessionid) return;
+
+    const prefix = sessionid.replace(/\d+$/, "");         // "session"
+    const number = parseInt(sessionid.match(/\d+$/)[0]);  // 11
+    const nextSessionID = `${prefix}${number + 1}`;       // "session12"
+
+    if (userProgress < nextSessionID) {
+      await updateUserMeta("progress", nextSessionID);
+      setProgress(nextSessionID);
+    }
+    navigate("/sessions");
+  }
+
   return (
     <div className="flex flex-col items-center">
       <div className="w-[609px] flex flex-col flex-grow">
@@ -154,6 +170,7 @@ function SessionActivity() {
       {isCorrect && currentIndex === activityPosts.length - 1 && (
         <div className="w-[609px] flex justify-center mt-auto mb-8">
           <p className="font-bold text-lg">You've completed all the questions!</p>
+          <button onClick={() => handleComplete(sessionid)}>Complete Session</button>
         </div>
       )}
     </div>
