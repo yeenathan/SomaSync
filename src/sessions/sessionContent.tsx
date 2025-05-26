@@ -1,3 +1,4 @@
+import Button from "@/components/ui/mybutton";
 import { updateUserMeta } from "@/utils/WP";
 import { Link, useOutletContext, useParams, useNavigate } from "react-router";
 
@@ -48,19 +49,21 @@ function SessionContent() {
         <h1 className="font-semibold text-3xl mb-2 md:mb-4">{post.title.rendered}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
       </div>
-      <div className="flex flex-row w-full p-4 justify-between">
-        <button onClick={() => navigate(-1)} style={{cursor: "pointer"}}>
+      <div className="flex flex-row w-full py-4 justify-between items-center">
+        <Button onClick={() => navigate(-1)} style={{cursor: "pointer"}}>
           Previous
-        </button>
+        </Button>
         <p>{currentIndex+1}/{maxPosts}</p>
-        {nextSlug ? 
-          <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
-          :
-          !hasQuiz?
-          <Link to={`/sessions/`} onClick={() => handleclick(params.sessionid)}>Complete</Link>
-          :
-          <Link to={`/sessions/${params.sessionid}`}>Return</Link>
-        }
+        <Button>
+          {nextSlug ? 
+            <Link to={`/sessions/${params.sessionid}/chapter/${nextSlug}`}>Next</Link>
+            :
+            !hasQuiz?
+            <Link to={`/sessions/`} onClick={() => handleclick(params.sessionid)}>Complete</Link>
+            :
+            <Link to={`/sessions/${params.sessionid}`}>Return</Link>
+          }
+        </Button>
       </div>
     </div>
   );

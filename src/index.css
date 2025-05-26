@@ -46,9 +46,13 @@ html.dark .menuIcons {
 }
 
 html.dark .button {
-  background-color: #53C285;
+  background-color: #212121;
   border-color: white;
   color: white;
+}
+
+html.dark .button:hover {
+  background-color: #53C285;
 }
 
 
