@@ -41,7 +41,7 @@ function PrivateRouteLayout() {
     return <Navigate to="/onboarding" replace/>
   }
   return(
-<div className="flex flex-col md:flex-row h-screen pl-20">
+<div className="flex flex-col md:flex-row h-screen md:pl-20">
   <NavigationRail/>
   <Outlet context={{setOnboarding}}/>
 </div>

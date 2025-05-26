@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router";
 import Category from "@/components/category";
 import { Link } from "react-router";
 import { getCategoryNameFromID } from "@/utils/WP";
+import ColourBlock from "@/components/ui/colourBlock";
 
 function Sessions() {
   const { posts, categories, userProgress }: { posts: Array<any>, categories: Array<any>, userProgress: string } = useOutletContext();
@@ -49,6 +50,8 @@ function Sessions() {
   }
 
   return (
+    <>
+    <ColourBlock/>
     <div className="flex flex-col gap-4 min-w-full">
       {
         sessions.map((session, key) => {
@@ -58,6 +61,7 @@ function Sessions() {
         })
       }
     </div>
+    </>
   )
 }
 

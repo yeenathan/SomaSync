@@ -1,6 +1,7 @@
 import { useOutletContext, useParams, useNavigate } from "react-router";
 import Category from "@/components/category";
 import { useEffect } from "react";
+import ColourBlock from "@/components/ui/colourBlock";
 
 
 function SessionHome() {
@@ -23,6 +24,8 @@ function SessionHome() {
   }).length > 0;
 
   return (
+    <>
+    <ColourBlock/>
     <div className="flex flex-col gap-4 min-w-full">
       {chapterPosts.map((post, i) => (
         <Category
@@ -40,6 +43,7 @@ function SessionHome() {
         />
       }
     </div>
+    </>
   )
 }
 
