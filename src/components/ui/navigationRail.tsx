@@ -38,7 +38,6 @@ const NavigationRail = () => {
   function handleClick() {
     setUnauthorized();
     navigate("/");
-    const [showOverlay, setShowOverlay] = useState(false);
   }
 
   return (
@@ -63,6 +62,7 @@ const NavigationRail = () => {
                 key={item.label}
                 onClick={() => navigate(item.path)}
                 className="menuIcons flex flex-col items-center w-10 h-10 text-sm text-gray-500 hover:text-blue-600 transition"
+                style={{cursor: "pointer"}}
               >
                 {iconMap[item.label]}
                 {item.label}
@@ -70,10 +70,10 @@ const NavigationRail = () => {
             ))}
           </div>
         </div>
-        <div className='flex flex-col items-center'>
+        <button onClick={handleClick} className='menuIcons flex flex-col items-center text-sm text-gray-500 hover:text-blue-600 transition' style={{ cursor: "pointer" }}>
           <LogoutIcon />
-          <button onClick={handleClick} style={{ cursor: "pointer" }}>log out</button>
-        </div>
+          <p>Log Out</p>
+        </button>
       </div>
 
       {showOverlay && (
