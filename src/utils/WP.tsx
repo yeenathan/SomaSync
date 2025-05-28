@@ -1,12 +1,12 @@
-const DOMAIN = "44.227.203.12";
+const DOMAIN = "https://somasync-wp.createplaychange.ca";
 
 async function getPosts() {
-  const content = fetch(`http://${DOMAIN}/wp-json/wp/v2/posts?orderby=slug&order=asc&per_page=100`).then((res) => res.json());
+  const content = fetch(`${DOMAIN}/wp-json/wp/v2/posts?orderby=slug&order=asc&per_page=100`).then((res) => res.json());
   return content;
 }
 
 async function getCategories() {
-  const content = fetch(`http://${DOMAIN}/wp-json/wp/v2/categories?orderby=slug&order=asc&exclude=1&per_page=30`).then((res) => res.json());
+  const content = fetch(`${DOMAIN}/wp-json/wp/v2/categories?orderby=slug&order=asc&exclude=1&per_page=30`).then((res) => res.json());
   return content;
 }
 
@@ -17,7 +17,7 @@ function getCategoryNameFromID(id:number, categories: Array<any>) {
 }
 
 async function registerNewUser(username: string, password: string, email: string) {
-  const res = await fetch(`http://${DOMAIN}/wp-json/custom/v1/register`, {
+  const res = await fetch(`${DOMAIN}/wp-json/custom/v1/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -39,7 +39,7 @@ async function registerNewUser(username: string, password: string, email: string
  */
 async function login(username: string, password: string, email: string) {
   try {
-    const res = await fetch(`http://${DOMAIN}/wp-json/jwt-auth/v1/token`, {
+    const res = await fetch(`${DOMAIN}/wp-json/jwt-auth/v1/token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ function getCookies() {
 }
 
 async function getUserInfo() {
-  const res = await fetch(`http://${DOMAIN}/wp-json/wp/v2/users/me`, {
+  const res = await fetch(`${DOMAIN}/wp-json/wp/v2/users/me`, {
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${getCookies().jwt}`
@@ -84,7 +84,7 @@ async function getUserInfo() {
 }
 
 async function getUserMeta() {
-  const res = await fetch(`http://${DOMAIN}/wp-json/custom/v1/meta/`, {
+  const res = await fetch(`${DOMAIN}/wp-json/custom/v1/meta/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -96,7 +96,7 @@ async function getUserMeta() {
 }
 
 async function updateUserMeta(key:string, value:any) {
-  const res = await fetch(`http://${DOMAIN}/wp-json/custom/v1/meta/`, {
+  const res = await fetch(`${DOMAIN}/wp-json/custom/v1/meta/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
