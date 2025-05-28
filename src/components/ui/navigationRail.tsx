@@ -45,7 +45,7 @@ const NavigationRail = () => {
       {/* mobile */}
       <div className="md:hidden py-2 px-4">
         <button onClick={() => setShowOverlay(true)} aria-label="Open Menu">
-          <MenuIcon className="w-6 h-6 text-gray-700 menuIcons" />
+          <MenuIcon className="w-6 h-6 text-black menuIcons" />
         </button>
       </div>
 
@@ -54,14 +54,14 @@ const NavigationRail = () => {
 
         <div className="w-20 flex flex-col items-center">
           <button onClick={() => setShowOverlay(true)} aria-label="Open Menu">
-            <MenuIcon className="w-6 h-6 text-gray-700 menuIcons mb-6" />
+            <MenuIcon className="w-6 h-6 text-black menuIcons mb-6" />
           </button>
           <div className="mt-4 space-y-6">
             {items.map((item) => (
               <button
                 key={item.label}
                 onClick={() => navigate(item.path)}
-                className="menuIcons flex flex-col items-center w-10 h-10 text-sm text-gray-500 hover:text-blue-600 transition"
+                className="menuIcons flex flex-col items-center w-10 h-10 text-sm  hover:text-[#3C8F61] hover:opacity-[50] transition hover:rounded-md  "
                 style={{cursor: "pointer"}}
               >
                 {iconMap[item.label]}
@@ -70,7 +70,7 @@ const NavigationRail = () => {
             ))}
           </div>
         </div>
-        <button onClick={handleClick} className='menuIcons flex flex-col items-center text-sm text-gray-500 hover:text-blue-600 transition' style={{ cursor: "pointer" }}>
+        <button onClick={handleClick} className='menuIcons flex flex-col items-center text-sm  hover:text-[#3C8F61] hover:opacity-[50] transition hover:rounded-md ' style={{ cursor: "pointer" }}>
           <LogoutIcon />
           <p>Log Out</p>
         </button>
