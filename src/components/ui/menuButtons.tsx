@@ -47,7 +47,7 @@ function MenuButtons() {
         <Link
           to="/settings"
           className="
-        w-1/2 h-[128px]
+        w-full h-[128px]
         md:h-auto md:max-w-[562px] aspect-[562/255]
         px-4 md:py-8 py-4 bg-[var(--orange-tertiary)] hover:bg-[var(--orange-primary)]
         rounded-[28px] inline-flex flex-col justify-end items-start
