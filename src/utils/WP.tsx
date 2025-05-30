@@ -109,4 +109,11 @@ async function updateUserMeta(key:string, value:any) {
   });
 }
 
-export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo, getUserMeta, updateUserMeta };
+async function getOnboardingPosts() {
+  const res = await fetch(`${DOMAIN}/wp-json/wp/v2/posts?categories=13`);
+  const data = await res.json();
+  const sorted = data.sort((a, b) => new Date(a.date) - new Date(b.date));
+  return sorted;
+}
+
+export { getPosts, getCategories, getCategoryNameFromID, registerNewUser, login, getUserInfo, getUserMeta, updateUserMeta, getOnboardingPosts };

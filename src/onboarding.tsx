@@ -1,10 +1,8 @@
-const DOMAIN = "44.227.203.12";
-
 import { Link, useOutletContext } from "react-router";
 import { useNavigate } from "react-router";
-import { updateUserMeta } from "./utils/WP";
-import { useParams } from "react-router";
+import { getOnboardingPosts, updateUserMeta } from "./utils/WP";
 import { useEffect, useState } from "react";
+import MyButton from "@/components/ui/mybutton"
 
 function Onboarding() {
   const navigate = useNavigate();
@@ -23,11 +21,8 @@ function Onboarding() {
   useEffect(() => {
     async function fetchOnboardingPosts() {
       try {
-        const res = await fetch(`http://${DOMAIN}/wp-json/wp/v2/posts?categories=13`);
-        const data = await res.json();
-
-        const sorted = data.sort((a, b) => new Date(a.date) - new Date(b.date));
-        setPosts(sorted);
+        const data = await getOnboardingPosts();
+        setPosts(data);
       } catch (err) {
         console.error("Failed to load", err);
       } finally {
@@ -91,19 +86,19 @@ function Onboarding() {
         </div>
         <div className="flex justify-end mt-8">
           {currentIndex < posts.length - 1 ? (
-            <button
+            <MyButton
               className="button border-1 bg-[#53C285] text-black px-4 py-2 rounded-2xl hover:bg-[#3C8F6166]"
               onClick={handleNext}
             >
               Next
-            </button>
+            </MyButton>
           ) : (
-            <button
+            <MyButton
               className="border-2 bg-[#3C8F61] text-black px-4 py-2 rounded-2xl hover:bg-[#3C8F6166]"
               onClick={handleclick}
             >
               Finish Onboarding
-            </button>
+            </MyButton>
           )}
         </div>
       </div>
